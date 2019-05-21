@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ConnectionFactory {
+public  class ConnectionFactory {
     private static final String USER = "root";
     private static final String PASS = "root";
     private static final String URL = "jdbc:mysql://localhost:3306/db_pousada";
@@ -47,9 +47,9 @@ public class ConnectionFactory {
         
     }
     
-    public volatile ConnectionFactory objConnection;
+    private static volatile ConnectionFactory objConnection;
     
-    public ConnectionFactory returnInstance(){
+    public static ConnectionFactory returnInstance(){
         if(objConnection == null){
             synchronized(ConnectionFactory.class){
                 if(objConnection == null){
