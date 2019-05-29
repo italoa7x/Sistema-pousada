@@ -146,6 +146,11 @@ public class Frm_inicial extends javax.swing.JFrame {
         menuCadastro.setText("Cadastro");
 
         jMenuItem1.setText("Funcionário");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         menuCadastro.add(jMenuItem1);
 
         jMenuItem2.setText("Produto");
@@ -188,6 +193,12 @@ public class Frm_inicial extends javax.swing.JFrame {
         new Frm_login().setVisible(true);
         dispose();
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        new Frm_cadastroFuncionario().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,7 @@ import ifpb.ads.dto.FuncionarioDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,22 +23,70 @@ public class FuncionarioDAO implements ITfuncionarioDAO{
     
     @Override
     public boolean create(Object obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            FuncionarioDTO funcionario = (FuncionarioDTO) obj;
+            pst = con.prepareStatement("INSERT INTO funcionario(nome,telefone,cpf,cargo) VALUES (?,?,?,?)");
+            pst.setString(1, funcionario.getName());
+            pst.setString(2, funcionario.getTelephone());
+            pst.setString(3, funcionario.getCpf());
+            pst.setString(4, funcionario.getCargo());
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e){
+            throw new Exception("Erro ao salva funcionário. " +e.getMessage());
+        }
     }
 
     @Override
     public Object read() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FuncionarioDTO retorno = new FuncionarioDTO();
+        ArrayList<FuncionarioDTO> vetor = new ArrayList<FuncionarioDTO>();
+        try{
+            pst = con.prepareStatement("SELECT *FROM funcionario");
+            rs = pst.executeQuery();
+            while(rs.next()){
+                FuncionarioDTO f = new FuncionarioDTO();
+                f.setName(rs.getString("nome"));
+                f.setCpf(rs.getString("cpf"));
+                f.setTelephone(rs.getString("telefone"));
+                f.setCargo(rs.getString("cargo"));
+                f.setId(rs.getInt("id"));
+                vetor.add(f);
+            }
+            retorno.setAllFuncionarios(vetor);
+            return retorno;
+        }catch(Exception e){
+            throw new Exception("Erro ao consultar funcionários. " + e.getMessage());
+        }
     }
 
     @Override
     public boolean update(Object obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            FuncionarioDTO funcionario = (FuncionarioDTO) obj;
+            pst = con.prepareStatement("UPDATE funcionario SET nome = ?, cpf = ?, cargo = ?, telefone = ? WHERE id = ?");
+            pst.setString(1, funcionario.getName());
+            pst.setString(2, funcionario.getCpf());
+            pst.setString(3, funcionario.getCargo());
+            pst.setString(4, funcionario.getTelephone());
+            pst.setInt(5, funcionario.getId());
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e){
+            throw new Exception("Erro ao atualizar dado do funcionário. " +e.getMessage());
+        }
     }
 
     @Override
     public boolean delete(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            pst = con.prepareStatement("DELETE FROM funcionario WHERE id = ?");
+            pst.setInt(1, id);
+            pst.execute();
+            return true;
+        }catch(Exception e){
+            throw new Exception("Erro ao excluir funcionário. " + e.getMessage());
+        }
     }
 
     @Override
@@ -56,12 +105,14 @@ public class FuncionarioDAO implements ITfuncionarioDAO{
             }
             
         }catch(Exception e){
-            throw new Exception(e.getMessage());
-        }finally{
-            ConnectionFactory.returnInstance().finallyConnection(con, pst, rs);
+            throw new Exception("Erro ao acessar o sistema. " + e.getMessage());
         }
         return logado;
     }
 
 
+    
+    public void fecharTodasConexoes(){
+        ConnectionFactory.returnInstance().finallyConnection(con, pst, rs);
+    }
 }

@@ -12,5 +12,9 @@ public interface StrategyCrudPessoa {
 
     public boolean update(Object obj) throws Exception;
 
-    public boolean delete() throws Exception;
+    public boolean delete(int id) throws Exception;
+    
+    public Object acessSistem(String name, String cpf) throws Exception;
+    
+    public void fecharConexoes();
 }

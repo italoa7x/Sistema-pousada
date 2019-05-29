@@ -36,16 +36,25 @@ public class Funcionario extends Pessoa implements StrategyCrudPessoa{
 
     @Override
     public Object read() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return daoFuncionario.read();
     }
 
     @Override
     public boolean update(Object obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return daoFuncionario.update(obj);
     }
 
     @Override
-    public boolean delete() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(int id) throws Exception {
+        return daoFuncionario.delete(id);
+    }
+    
+    public void fecharConexoes(){
+        daoFuncionario.fecharTodasConexoes();
+    }
+
+    @Override
+    public Object acessSistem(String name, String cpf) throws Exception {
+        return daoFuncionario.acessSystem(name, cpf);
     }
 }
