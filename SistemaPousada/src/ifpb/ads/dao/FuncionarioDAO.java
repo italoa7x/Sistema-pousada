@@ -111,8 +111,8 @@ public class FuncionarioDAO implements ITfuncionarioDAO{
     }
 
 
-    
-    public void fecharTodasConexoes(){
+    @Override
+    public void fecharConexoes() {
         ConnectionFactory.returnInstance().finallyConnection(con, pst, rs);
     }
 }

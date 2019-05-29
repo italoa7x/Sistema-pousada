@@ -1,6 +1,7 @@
 package ifpb.ads.model;
 
 import ifpb.ads.dao.FuncionarioDAO;
+import ifpb.ads.dao.ITfuncionarioDAO;
 import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.strategy.StrategyCrudPessoa;
 
@@ -10,7 +11,7 @@ import ifpb.ads.strategy.StrategyCrudPessoa;
  */
 public class Funcionario extends Pessoa implements StrategyCrudPessoa{
     private String cargo;
-    private FuncionarioDAO daoFuncionario;
+    private ITfuncionarioDAO daoFuncionario;
 
     public Funcionario() {
         daoFuncionario = new FuncionarioDAO();
@@ -50,10 +51,9 @@ public class Funcionario extends Pessoa implements StrategyCrudPessoa{
     }
     
     public void fecharConexoes(){
-        daoFuncionario.fecharTodasConexoes();
+        daoFuncionario.fecharConexoes();
     }
 
-    @Override
     public Object acessSistem(String name, String cpf) throws Exception {
         return daoFuncionario.acessSystem(name, cpf);
     }

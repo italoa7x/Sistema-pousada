@@ -16,4 +16,5 @@ public interface ITfuncionarioDAO {
     
     public Object acessSystem(String name, String cpf) throws Exception;
 
+    public void fecharConexoes();
 }

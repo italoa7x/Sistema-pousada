@@ -5,11 +5,12 @@
  */
 package ifpb.ads.view;
 
-import ifpb.ads.control.Controler_Funcionario;
+import ifpb.ads.control.Controler_Hospede;
 import ifpb.ads.dto.FuncionarioDTO;
+import ifpb.ads.dto.HospedeDTO;
 import ifpb.ads.iterator.IteratorFuncionarioDTO;
+import ifpb.ads.iterator.IteratorHospedeDTO;
 import ifpb.ads.strategy.StrategyCrudPessoa;
-import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,16 +18,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author italo
  */
-public class Frm_cadastroFuncionario extends javax.swing.JFrame {
+public class Frm_cadastroHospede extends javax.swing.JFrame {
 
     /**
      * Creates new form Frm_cadastroFuncionario
      */
-    private StrategyCrudPessoa controleFuncionario;
+    private StrategyCrudPessoa controleHospede;
 
-    public Frm_cadastroFuncionario() {
+    public Frm_cadastroHospede() {
         initComponents();
-        controleFuncionario = new Controler_Funcionario();
+        controleHospede = (StrategyCrudPessoa) new Controler_Hospede();
 
         this.preencherTabela();
 
@@ -34,18 +35,18 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
     private void preencherTabela() {
         try {
-            FuncionarioDTO registro = (FuncionarioDTO) controleFuncionario.read();
-            IteratorFuncionarioDTO iterator = new IteratorFuncionarioDTO(registro.getAllFuncionarios());
-            DefaultTableModel modelo = (DefaultTableModel) this.tbl_funcionarios.getModel();
+            HospedeDTO registro = (HospedeDTO) controleHospede.read();
+            IteratorHospedeDTO iterator = new IteratorHospedeDTO (registro.getAllHospedes());
+            DefaultTableModel modelo = (DefaultTableModel) this.tbl_hospedes.getModel();
 
             while (iterator.hasnext()) {
                 String[] dado = new String[5];
-                FuncionarioDTO atual = (FuncionarioDTO) iterator.next();
+                HospedeDTO atual = (HospedeDTO) iterator.next();
                 dado[0] = atual.getId() + "";
                 dado[1] = atual.getName();
                 dado[2] = atual.getCpf();
                 dado[3] = atual.getTelephone();
-                dado[4] = atual.getCargo();
+                dado[4] = atual.getEmail();
                 modelo.addRow(dado);
             }
         } catch (Exception ex) {
@@ -56,18 +57,18 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
     private void atualizarTabela() {
         try {
-            FuncionarioDTO registro = (FuncionarioDTO) controleFuncionario.read();
-            IteratorFuncionarioDTO iterator = new IteratorFuncionarioDTO(registro.getAllFuncionarios());
-            DefaultTableModel modelo = (DefaultTableModel) this.tbl_funcionarios.getModel();
+            HospedeDTO registro = (HospedeDTO) controleHospede.read();
+            IteratorHospedeDTO iterator = new IteratorHospedeDTO (registro.getAllHospedes());
+            DefaultTableModel modelo = (DefaultTableModel) this.tbl_hospedes.getModel();
             modelo.setNumRows(0);
             while (iterator.hasnext()) {
                 String[] dado = new String[5];
-                FuncionarioDTO atual = (FuncionarioDTO) iterator.next();
+                HospedeDTO atual = (HospedeDTO) iterator.next();
                 dado[0] = atual.getId() + "";
                 dado[1] = atual.getName();
                 dado[2] = atual.getCpf();
                 dado[3] = atual.getTelephone();
-                dado[4] = atual.getCargo();
+                dado[4] = atual.getEmail();
                 modelo.addRow(dado);
             }
         } catch (Exception ex) {
@@ -85,7 +86,7 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_funcionarios = new javax.swing.JTable();
+        tbl_hospedes = new javax.swing.JTable();
         btExcluir = new javax.swing.JButton();
         btNovo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -95,29 +96,29 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
         campoNome = new javax.swing.JTextField();
         campoTelefone = new javax.swing.JFormattedTextField();
         campoCpf = new javax.swing.JFormattedTextField();
-        comboCargos = new javax.swing.JComboBox<>();
         btSalvar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         campoId = new javax.swing.JTextField();
+        campoEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        tbl_funcionarios.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_hospedes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "CPF", "Telefone", "Cargo"
+                "ID", "Nome", "CPF", "Telefone", "E-mail"
             }
         ));
-        tbl_funcionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_hospedes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_funcionariosMouseClicked(evt);
+                tbl_hospedesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbl_funcionarios);
+        jScrollPane1.setViewportView(tbl_hospedes);
 
         btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_ic_delete_48px_352303.png"))); // NOI18N
         btExcluir.setPreferredSize(new java.awt.Dimension(80, 70));
@@ -141,7 +142,7 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
         jLabel3.setText("CPF");
 
-        jLabel4.setText("Cargo");
+        jLabel4.setText("E-mail");
 
         campoNome.setEditable(false);
 
@@ -158,8 +159,6 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        comboCargos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atendente", "Recepcionista", "Serviços Gerais", "Gerente" }));
 
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_save_2639912.png"))); // NOI18N
         btSalvar.setText("Salvar");
@@ -181,6 +180,8 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
         campoId.setEditable(false);
 
+        campoEmail.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,9 +193,9 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
                 .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(107, 107, 107))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -204,27 +205,24 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(campoTelefone)
-                                        .addComponent(campoCpf)
-                                        .addComponent(comboCargos, 0, 145, Short.MAX_VALUE))
-                                    .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(campoTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                                .addComponent(campoCpf))
+                                            .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 58, Short.MAX_VALUE))
+                                    .addComponent(campoEmail))))
                         .addGap(5, 5, 5))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(btSalvar)
-                                .addGap(34, 34, 34)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel5)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)))
+                        .addComponent(btSalvar)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -246,18 +244,18 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(campoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
-                            .addComponent(comboCargos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -276,24 +274,23 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // TODO add your handling code here:
         try {
-            // pega os dados do funcionário que form preenchidos nos campos.
+            // pega os dados do hóspede que form preenchidos nos campos.
             String nome = campoNome.getText();
-            String cargo = comboCargos.getSelectedItem().toString();
+            String email = campoEmail.getText();
             String cpf = campoCpf.getText();
             String telefone = campoTelefone.getText();
             
-            // instancia um novo funcionárioDTO que será usado como "moeda" de transferência de dados.
-            FuncionarioDTO novo = new FuncionarioDTO();
+            // instancia um novo hospedeDTO que será usado como "moeda" de transferência de dados.
+            HospedeDTO novo = new HospedeDTO();
             // seta os dados do funcionário.
             novo.setName(nome);
-            novo.setCargo(cargo);
             novo.setCpf(cpf);
             novo.setTelephone(telefone);
-
+            novo.setEmail(email);
             if(nome.length() > 0 && !cpf.equals("   .   .   -  ") && !campoId.getText().equals("")){
                 int id = Integer.parseInt(campoId.getText());
                 novo.setId(id);
-                if(controleFuncionario.update(novo)){
+                if(controleHospede.update(novo)){
                     JOptionPane.showMessageDialog(null, "Atualizado.");
                     this.atualizarTabela();
                     this.limparCampos();
@@ -301,7 +298,7 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
             }
             else if (nome.length() > 0 && !cpf.equals("   .   .   -  ")) {
                 // manda o objetoDTO para seguir o curso do MVC até o banco de dados.
-                if (controleFuncionario.save(novo)) {
+                if (controleHospede.save(novo)) {
                     JOptionPane.showMessageDialog(null, "Cadastrado!");
                     this.atualizarTabela();
                     this.limparCampos();
@@ -320,12 +317,13 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         // TODO add your handling code here:
-        int linha = tbl_funcionarios.getSelectedRow();
-        int id = Integer.parseInt((String) tbl_funcionarios.getValueAt(linha, 0));
+        int linha = tbl_hospedes.getSelectedRow();
+        int id = Integer.parseInt((String) tbl_hospedes.getValueAt(linha, 0));
         try {
-            if (controleFuncionario.delete(id)) {
+            if (controleHospede.delete(id)) {
                 JOptionPane.showMessageDialog(null, "Excluído!");
                 this.atualizarTabela();
+                this.limparCampos();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -338,30 +336,34 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void tbl_funcionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_funcionariosMouseClicked
+    private void tbl_hospedesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hospedesMouseClicked
         this.habilitarCampos();
-        int linha = tbl_funcionarios.getSelectedRow();
-        String id = (String) tbl_funcionarios.getValueAt(linha, 0);
-        String nome = (String) tbl_funcionarios.getValueAt(linha, 1);
-        String cpf = (String) tbl_funcionarios.getValueAt(linha, 2);
-        String telefone = (String) tbl_funcionarios.getValueAt(linha, 3);
+        int linha = tbl_hospedes.getSelectedRow();
+        String id = (String) tbl_hospedes.getValueAt(linha, 0);
+        String nome = (String) tbl_hospedes.getValueAt(linha, 1);
+        String cpf = (String) tbl_hospedes.getValueAt(linha, 2);
+        String telefone = (String) tbl_hospedes.getValueAt(linha, 3);
+        String email = (String) tbl_hospedes.getValueAt(linha, 4);
         
         campoNome.setText(nome);
         campoCpf.setText(cpf);
         campoTelefone.setText(telefone);
         campoId.setText(id);
-    }//GEN-LAST:event_tbl_funcionariosMouseClicked
+        campoEmail.setText(email);
+    }//GEN-LAST:event_tbl_hospedesMouseClicked
 
     private void habilitarCampos() {
         campoCpf.setEditable(true);
         campoNome.setEditable(true);
         campoTelefone.setEditable(true);
+        campoEmail.setEditable(true);
     }
 
     private void limparCampos() {
         campoCpf.setText("");
         campoNome.setText("");
         campoTelefone.setText("");
+        campoEmail.setText("");
     }
 
 
@@ -370,10 +372,10 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btSalvar;
     private javax.swing.JFormattedTextField campoCpf;
+    private javax.swing.JTextField campoEmail;
     private javax.swing.JTextField campoId;
     private javax.swing.JTextField campoNome;
     private javax.swing.JFormattedTextField campoTelefone;
-    private javax.swing.JComboBox<String> comboCargos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -381,6 +383,6 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl_funcionarios;
+    private javax.swing.JTable tbl_hospedes;
     // End of variables declaration//GEN-END:variables
 }

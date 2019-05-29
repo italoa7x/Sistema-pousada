@@ -9,24 +9,35 @@ import java.util.ArrayList;
 public class QuartoDTO {
 
     private int accommodations;
-    private double daily;
+    private float daily;
     private int id;
     private String status;
     private ArrayList<QuartoDTO> allQuartos;
+    private ArrayList<ExtraDTO> listExtras;
+    
+    
     
     public int getAccommodations() {
         return accommodations;
+    }
+
+    public ArrayList<ExtraDTO> getListExtras() {
+        return listExtras;
+    }
+
+    public void setListExtras(ArrayList<ExtraDTO> listExtras) {
+        this.listExtras = listExtras;
     }
 
     public void setAccommodations(int accommodations) {
         this.accommodations = accommodations;
     }
 
-    public double getDaily() {
+    public float getDaily() {
         return daily;
     }
 
-    public void setDaily(double daily) {
+    public void setDaily(float daily) {
         this.daily = daily;
     }
 

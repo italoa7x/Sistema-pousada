@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class ExtraDTO {
     private String extra;
     private int id;
-    private ArrayList<ExtraDTO> allReservas;
+    private ArrayList<ExtraDTO> allExtras;
 
     public ArrayList<ExtraDTO> getAllReservas() {
-        return allReservas;
+        return allExtras;
     }
 
     public void setAllReservas(ArrayList<ExtraDTO> allReservas) {
-        this.allReservas = allReservas;
+        this.allExtras = allReservas;
     }
     
     public String getExtra() {

@@ -39,7 +39,6 @@ public class Controler_Funcionario implements StrategyCrudPessoa{
         return funcionario.delete(id);
     }
     
-    @Override
     public void fecharConexoes(){
         funcionario.fecharConexoes();
     }

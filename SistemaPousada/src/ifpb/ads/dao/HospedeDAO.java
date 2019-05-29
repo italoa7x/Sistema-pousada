@@ -23,7 +23,7 @@ public class HospedeDAO implements IThospedeDAO {
 
     @Override
     public boolean create(HospedeDTO obj) throws Exception {
-        String sql = "INSERT INTO tbl_hospede(nome,cpf,telefone,email) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO hospede(nome,cpf,telefone,email) VALUES (?,?,?,?)";
         try {
             pst = con.prepareStatement(sql);
             pst.setString(1, obj.getName());
@@ -34,8 +34,6 @@ public class HospedeDAO implements IThospedeDAO {
             return true;
         } catch (Exception e) {
             throw new Exception("Erro ao salvar cliente. "+e.getMessage());
-        }finally{
-            ConnectionFactory.returnInstance().finallyConnection(con, pst);
         }
     }
 
@@ -44,7 +42,7 @@ public class HospedeDAO implements IThospedeDAO {
         HospedeDTO retorno = new HospedeDTO();
         ArrayList<HospedeDTO> vetor = new ArrayList<HospedeDTO>();
         try{
-            String sql = "SELECT *FROM tbl_hospede";
+            String sql = "SELECT *FROM hospede";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             while(rs.next()){
@@ -58,19 +56,38 @@ public class HospedeDAO implements IThospedeDAO {
             }
             retorno.setAllHospedes(vetor);
         }catch(Exception e){
-            ConnectionFactory.returnInstance().finallyConnection(con, pst, rs);
+            throw new Exception("Erro ao consultar hospedes. " + e.getMessage());
         }
         return retorno;
     }
 
     @Override
     public boolean delete(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try{
+            pst = con.prepareStatement("DELETE FROM hospede WHERE id = ?");
+            pst.setInt(1, id);
+            pst.execute();
+            return true;
+        }catch(Exception e){
+            throw new Exception("Erro ao excluir hospede. " + e.getMessage());
+        }
     }
 
     @Override
     public boolean update(HospedeDTO obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            HospedeDTO hospede = (HospedeDTO) obj;
+            pst = con.prepareStatement("UPDATE hospede SET nome = ?, cpf = ?, email = ?, telefone = ? WHERE id = ?");
+            pst.setString(1, hospede.getName());
+            pst.setString(2, hospede.getCpf());
+            pst.setString(3, hospede.getEmail());
+            pst.setString(4, hospede.getTelephone());
+            pst.setInt(5, hospede.getId());
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e){
+            throw new Exception("Erro ao atualizar dado do hospede. " +e.getMessage());
+        }
     }
 
 }

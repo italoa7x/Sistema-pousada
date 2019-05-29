@@ -46,10 +46,9 @@ public class Frm_inicial extends javax.swing.JFrame {
         menuInfo = new javax.swing.JMenu();
         OpSobre = new javax.swing.JMenuItem();
         menuCadastro = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        opCadastroFuncionario = new javax.swing.JMenuItem();
+        opCadastroProduto = new javax.swing.JMenuItem();
+        opCadastroQuarto = new javax.swing.JMenuItem();
 
         jMenu4.setText("jMenu4");
 
@@ -61,6 +60,11 @@ public class Frm_inicial extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("MENU RÁPIDO"));
 
         btCadastro.setText("Cadastro");
+        btCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastroActionPerformed(evt);
+            }
+        });
 
         btPedido.setText("Pedido");
 
@@ -145,22 +149,29 @@ public class Frm_inicial extends javax.swing.JFrame {
 
         menuCadastro.setText("Cadastro");
 
-        jMenuItem1.setText("Funcionário");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        opCadastroFuncionario.setText("Funcionário");
+        opCadastroFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                opCadastroFuncionarioActionPerformed(evt);
             }
         });
-        menuCadastro.add(jMenuItem1);
+        menuCadastro.add(opCadastroFuncionario);
 
-        jMenuItem2.setText("Produto");
-        menuCadastro.add(jMenuItem2);
+        opCadastroProduto.setText("Produto");
+        opCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opCadastroProdutoActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(opCadastroProduto);
 
-        jMenuItem4.setText("Quarto");
-        menuCadastro.add(jMenuItem4);
-
-        jMenuItem6.setText("Extra");
-        menuCadastro.add(jMenuItem6);
+        opCadastroQuarto.setText("Quarto");
+        opCadastroQuarto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opCadastroQuartoActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(opCadastroQuarto);
 
         jMenuBar1.add(menuCadastro);
 
@@ -194,11 +205,29 @@ public class Frm_inicial extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btSairActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void opCadastroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opCadastroFuncionarioActionPerformed
         // TODO add your handling code here:
         new Frm_cadastroFuncionario().setVisible(true);
         dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_opCadastroFuncionarioActionPerformed
+
+    private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
+        // TODO add your handling code here:
+        new Frm_cadastroHospede().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btCadastroActionPerformed
+
+    private void opCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opCadastroProdutoActionPerformed
+        // TODO add your handling code here:
+        new Frm_cadastroProduto().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_opCadastroProdutoActionPerformed
+
+    private void opCadastroQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opCadastroQuartoActionPerformed
+        // TODO add your handling code here:
+        new Frm_cadastroQuarto().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_opCadastroQuartoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -210,17 +239,16 @@ public class Frm_inicial extends javax.swing.JFrame {
     private javax.swing.JButton btSair;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenu menuInfo;
     private javax.swing.JMenu menuRegistro;
     private javax.swing.JMenuItem ooRegistroFuncionarios;
+    private javax.swing.JMenuItem opCadastroFuncionario;
+    private javax.swing.JMenuItem opCadastroProduto;
+    private javax.swing.JMenuItem opCadastroQuarto;
     private javax.swing.JMenuItem opRegistroHospedes;
     private javax.swing.JMenuItem opRegistroProdutos;
     private javax.swing.JMenuItem opRegistroVendas;

@@ -1,6 +1,7 @@
 package ifpb.ads.model;
 
 import ifpb.ads.dao.HospedeDAO;
+import ifpb.ads.dao.IThospedeDAO;
 import ifpb.ads.dto.HospedeDTO;
 import ifpb.ads.strategy.StrategyCrudPessoa;
 
@@ -9,7 +10,7 @@ import ifpb.ads.strategy.StrategyCrudPessoa;
  * @author Italo
  */
 public class Hospede extends Pessoa implements StrategyCrudPessoa{
-    private HospedeDAO daoHospede;
+    private IThospedeDAO daoHospede;
 
     public Hospede() {
         daoHospede = new HospedeDAO();
@@ -44,15 +45,5 @@ public class Hospede extends Pessoa implements StrategyCrudPessoa{
     @Override
     public boolean delete(int id) throws Exception {
         return daoHospede.delete(id);
-    }
-
-    @Override
-    public Object acessSistem(String name, String cpf) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void fecharConexoes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

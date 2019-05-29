@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ProdutoDTO {
     private String name;
     private int amount;
-    private double value;
+    private float value;
     private int id;
     private ArrayList<ProdutoDTO> allProdutos;
 
@@ -39,11 +39,11 @@ public class ProdutoDTO {
         this.amount = amount;
     }
 
-    public double getValue() {
+    public float getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(float value) {
         this.value = value;
     }
 

@@ -5,19 +5,19 @@
  */
 package ifpb.ads.iterator;
 
-import ifpb.ads.dto.ProdutoDTO;
+import ifpb.ads.dto.QuartoDTO;
 import java.util.ArrayList;
 
 /**
  *
  * @author italo
  */
-public class IteratorProduto implements Iterator {
+public class IteratorQuartoDTO implements Iterator {
 
-    private ArrayList<ProdutoDTO> lista;
+    private ArrayList<QuartoDTO> lista;
     private int quantidade;
 
-    public IteratorProduto(ArrayList<ProdutoDTO> vetor) {
+    public IteratorQuartoDTO(ArrayList<QuartoDTO> vetor) {
         lista = vetor;
         quantidade = 0;
     }
@@ -33,7 +33,7 @@ public class IteratorProduto implements Iterator {
 
     @Override
     public Object next() {
-        ProdutoDTO novo = lista.get(quantidade);
+        QuartoDTO novo = lista.get(quantidade);
         quantidade++;
         return novo;
     }

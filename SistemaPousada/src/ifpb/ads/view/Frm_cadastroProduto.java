@@ -5,11 +5,12 @@
  */
 package ifpb.ads.view;
 
-import ifpb.ads.control.Controler_Funcionario;
+import ifpb.ads.control.Controler_Produto;
 import ifpb.ads.dto.FuncionarioDTO;
+import ifpb.ads.dto.ProdutoDTO;
 import ifpb.ads.iterator.IteratorFuncionarioDTO;
+import ifpb.ads.iterator.IteratorProdutoDTO;
 import ifpb.ads.strategy.StrategyCrudPessoa;
-import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,16 +18,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author italo
  */
-public class Frm_cadastroFuncionario extends javax.swing.JFrame {
+public class Frm_cadastroProduto extends javax.swing.JFrame {
 
     /**
      * Creates new form Frm_cadastroFuncionario
      */
-    private StrategyCrudPessoa controleFuncionario;
+    private StrategyCrudPessoa controleProduto;
 
-    public Frm_cadastroFuncionario() {
+    public Frm_cadastroProduto() {
         initComponents();
-        controleFuncionario = new Controler_Funcionario();
+        controleProduto = (StrategyCrudPessoa) new Controler_Produto();
 
         this.preencherTabela();
 
@@ -34,18 +35,17 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
     private void preencherTabela() {
         try {
-            FuncionarioDTO registro = (FuncionarioDTO) controleFuncionario.read();
-            IteratorFuncionarioDTO iterator = new IteratorFuncionarioDTO(registro.getAllFuncionarios());
+            ProdutoDTO registro = (ProdutoDTO) controleProduto.read();
+            IteratorProdutoDTO iterator = new IteratorProdutoDTO(registro.getAllProdutos());
             DefaultTableModel modelo = (DefaultTableModel) this.tbl_funcionarios.getModel();
 
             while (iterator.hasnext()) {
-                String[] dado = new String[5];
-                FuncionarioDTO atual = (FuncionarioDTO) iterator.next();
-                dado[0] = atual.getId() + "";
+                String[] dado = new String[4];
+                ProdutoDTO atual =  (ProdutoDTO) iterator.next();
+                dado[0] = atual.getId() +"";
                 dado[1] = atual.getName();
-                dado[2] = atual.getCpf();
-                dado[3] = atual.getTelephone();
-                dado[4] = atual.getCargo();
+                dado[2] = atual.getValue()+"";
+                dado[3] = atual.getAmount() + "";
                 modelo.addRow(dado);
             }
         } catch (Exception ex) {
@@ -56,23 +56,23 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
     private void atualizarTabela() {
         try {
-            FuncionarioDTO registro = (FuncionarioDTO) controleFuncionario.read();
-            IteratorFuncionarioDTO iterator = new IteratorFuncionarioDTO(registro.getAllFuncionarios());
+            ProdutoDTO registro = (ProdutoDTO) controleProduto.read();
+            IteratorProdutoDTO iterator = new IteratorProdutoDTO(registro.getAllProdutos());
             DefaultTableModel modelo = (DefaultTableModel) this.tbl_funcionarios.getModel();
             modelo.setNumRows(0);
             while (iterator.hasnext()) {
-                String[] dado = new String[5];
-                FuncionarioDTO atual = (FuncionarioDTO) iterator.next();
-                dado[0] = atual.getId() + "";
+                String[] dado = new String[4];
+                ProdutoDTO atual =  (ProdutoDTO) iterator.next();
+                dado[0] = atual.getId() +"";
                 dado[1] = atual.getName();
-                dado[2] = atual.getCpf();
-                dado[3] = atual.getTelephone();
-                dado[4] = atual.getCargo();
+                dado[2] = atual.getValue()+"";
+                dado[3] = atual.getAmount() + "";
                 modelo.addRow(dado);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+
     }
 
     /**
@@ -90,16 +90,12 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
         btNovo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         campoNome = new javax.swing.JTextField();
-        campoTelefone = new javax.swing.JFormattedTextField();
-        campoCpf = new javax.swing.JFormattedTextField();
-        comboCargos = new javax.swing.JComboBox<>();
         btSalvar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        campoId = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        campoQtd = new javax.swing.JTextField();
+        campoValor = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -109,7 +105,7 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "CPF", "Telefone", "Cargo"
+                "ID", "Nome", "Valor", "Quantidade"
             }
         ));
         tbl_funcionarios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,29 +133,9 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
         jLabel1.setText("Nome");
 
-        jLabel2.setText("Telefone");
-
-        jLabel3.setText("CPF");
-
-        jLabel4.setText("Cargo");
+        jLabel2.setText("Valor R$");
 
         campoNome.setEditable(false);
-
-        campoTelefone.setEditable(false);
-        try {
-            campoTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #-####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        campoCpf.setEditable(false);
-        try {
-            campoCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.####.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        comboCargos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atendente", "Recepcionista", "Serviços Gerais", "Gerente" }));
 
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_save_2639912.png"))); // NOI18N
         btSalvar.setText("Salvar");
@@ -177,9 +153,15 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("ID");
+        jLabel3.setText("QTD");
 
-        campoId.setEditable(false);
+        campoQtd.setEditable(false);
+
+        try {
+            campoValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,30 +183,24 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addComponent(campoNome))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
+                                .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(campoTelefone)
-                                        .addComponent(campoCpf)
-                                        .addComponent(comboCargos, 0, 145, Short.MAX_VALUE))
-                                    .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(campoQtd, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                                    .addComponent(campoValor))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(5, 5, 5))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(btSalvar)
-                                .addGap(34, 34, 34)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(24, 24, 24)
+                                .addComponent(btSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel5)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)))
+                                .addComponent(jLabel3)))
+                        .addGap(12, 12, 12)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -234,30 +210,21 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2))
-                            .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(campoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(comboCargos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(campoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btSalvar)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -278,30 +245,19 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
         try {
             // pega os dados do funcionário que form preenchidos nos campos.
             String nome = campoNome.getText();
-            String cargo = comboCargos.getSelectedItem().toString();
-            String cpf = campoCpf.getText();
-            String telefone = campoTelefone.getText();
+            float valor = Float.parseFloat(campoValor.getText());
+            int quantidade = Integer.parseInt(campoQtd.getText());
             
-            // instancia um novo funcionárioDTO que será usado como "moeda" de transferência de dados.
-            FuncionarioDTO novo = new FuncionarioDTO();
-            // seta os dados do funcionário.
+            // instancia um novo produtoDTO que será usado como "moeda" de transferência de dados.
+            ProdutoDTO novo = new ProdutoDTO();
+            // seta os dados do produto.
             novo.setName(nome);
-            novo.setCargo(cargo);
-            novo.setCpf(cpf);
-            novo.setTelephone(telefone);
+            novo.setAmount(quantidade);
+            novo.setValue(valor);
 
-            if(nome.length() > 0 && !cpf.equals("   .   .   -  ") && !campoId.getText().equals("")){
-                int id = Integer.parseInt(campoId.getText());
-                novo.setId(id);
-                if(controleFuncionario.update(novo)){
-                    JOptionPane.showMessageDialog(null, "Atualizado.");
-                    this.atualizarTabela();
-                    this.limparCampos();
-                }
-            }
-            else if (nome.length() > 0 && !cpf.equals("   .   .   -  ")) {
+             if (nome.length() > 0 && !campoValor.getText().equals("")) {
                 // manda o objetoDTO para seguir o curso do MVC até o banco de dados.
-                if (controleFuncionario.save(novo)) {
+                if (controleProduto.save(novo)) {
                     JOptionPane.showMessageDialog(null, "Cadastrado!");
                     this.atualizarTabela();
                     this.limparCampos();
@@ -323,7 +279,7 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
         int linha = tbl_funcionarios.getSelectedRow();
         int id = Integer.parseInt((String) tbl_funcionarios.getValueAt(linha, 0));
         try {
-            if (controleFuncionario.delete(id)) {
+            if (controleProduto.delete(id)) {
                 JOptionPane.showMessageDialog(null, "Excluído!");
                 this.atualizarTabela();
             }
@@ -339,29 +295,19 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbl_funcionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_funcionariosMouseClicked
-        this.habilitarCampos();
-        int linha = tbl_funcionarios.getSelectedRow();
-        String id = (String) tbl_funcionarios.getValueAt(linha, 0);
-        String nome = (String) tbl_funcionarios.getValueAt(linha, 1);
-        String cpf = (String) tbl_funcionarios.getValueAt(linha, 2);
-        String telefone = (String) tbl_funcionarios.getValueAt(linha, 3);
-        
-        campoNome.setText(nome);
-        campoCpf.setText(cpf);
-        campoTelefone.setText(telefone);
-        campoId.setText(id);
+       
     }//GEN-LAST:event_tbl_funcionariosMouseClicked
 
     private void habilitarCampos() {
-        campoCpf.setEditable(true);
+        campoQtd.setEditable(true);
         campoNome.setEditable(true);
-        campoTelefone.setEditable(true);
+        campoValor.setEditable(true);
     }
 
     private void limparCampos() {
-        campoCpf.setText("");
+        campoQtd.setText("");
         campoNome.setText("");
-        campoTelefone.setText("");
+        campoValor.setText("");
     }
 
 
@@ -369,17 +315,13 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btSalvar;
-    private javax.swing.JFormattedTextField campoCpf;
-    private javax.swing.JTextField campoId;
     private javax.swing.JTextField campoNome;
-    private javax.swing.JFormattedTextField campoTelefone;
-    private javax.swing.JComboBox<String> comboCargos;
+    private javax.swing.JTextField campoQtd;
+    private javax.swing.JFormattedTextField campoValor;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_funcionarios;
     // End of variables declaration//GEN-END:variables
