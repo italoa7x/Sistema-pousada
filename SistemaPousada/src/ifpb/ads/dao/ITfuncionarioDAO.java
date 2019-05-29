@@ -13,5 +13,7 @@ public interface ITfuncionarioDAO {
     public boolean update(Object obj) throws Exception;
 
     public boolean delete(int id) throws Exception;
+    
+    public Object acessSystem(String name, String cpf) throws Exception;
 
 }
