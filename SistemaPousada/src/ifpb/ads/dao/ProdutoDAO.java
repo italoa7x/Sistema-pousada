@@ -80,7 +80,7 @@ public class ProdutoDAO implements ITprodutoDAO {
         try {
             ProdutoDTO produto = new ProdutoDTO();
             pst = con.prepareStatement("SELECT *FROM produto WHERE nome LIKE ? LIMIT 1");
-            pst.setString(1, name);
+            pst.setString(1, "%"+name+"%");
             rs = pst.executeQuery();
             while (rs.next()) {
                 produto.setName(rs.getString("nome"));

@@ -2,6 +2,7 @@ package ifpb.ads.model;
 
 import ifpb.ads.dao.Adapter.AdapterProduto;
 import ifpb.ads.dao.Adapter.ServicePessoa;
+import ifpb.ads.dto.ProdutoDTO;
 import ifpb.ads.strategy.StrategyCrudPessoa;
 
 /**
@@ -17,7 +18,7 @@ public class Produto implements StrategyCrudPessoa{
     private ServicePessoa daoProduto;
 
     public Produto() {
-        daoProduto = new AdapterProduto();
+        daoProduto = (AdapterProduto) new AdapterProduto();
     }
     
     
@@ -75,7 +76,7 @@ public class Produto implements StrategyCrudPessoa{
 
     @Override
     public Object search(String name) throws Exception {
-        return daoProduto.buscar_por_nome(name);
+        return (ProdutoDTO) daoProduto.buscar_por_nome(name);
     }
 
     

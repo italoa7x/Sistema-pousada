@@ -6,6 +6,7 @@
 package ifpb.ads.dao.Adapter;
 
 import ifpb.ads.dao.ProdutoDAO;
+import ifpb.ads.dto.ProdutoDTO;
 
 /**
  *
@@ -40,7 +41,7 @@ public class AdapterProduto extends ProdutoDAO implements ServicePessoa {
 
     @Override
     public Object buscar_por_nome(String nome) throws Exception {
-        return super.search(nome);
+        return (ProdutoDTO) super.search(nome);
     }
 
 }

@@ -36,7 +36,6 @@ public class Controler_Hospede implements StrategyCrudPessoa{
 
     @Override
     public Object search(String name) throws Exception {
-        System.out.println("entrou no controler");
         return hospede.search(name);
     }
 

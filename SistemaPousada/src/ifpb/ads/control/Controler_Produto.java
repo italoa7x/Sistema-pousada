@@ -1,5 +1,6 @@
 package ifpb.ads.control;
 
+import ifpb.ads.dto.ProdutoDTO;
 import ifpb.ads.model.Produto;
 import ifpb.ads.strategy.StrategyCrudPessoa;
 
@@ -37,7 +38,7 @@ public class Controler_Produto implements StrategyCrudPessoa{
 
     @Override
     public Object search(String name) throws Exception {
-        return produto.search(name);
+        return (ProdutoDTO) produto.search(name);
     }
 
  

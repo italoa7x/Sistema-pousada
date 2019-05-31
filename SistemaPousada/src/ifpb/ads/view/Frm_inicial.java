@@ -69,6 +69,11 @@ public class Frm_inicial extends javax.swing.JFrame {
 
         btPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_notepad_285631.png"))); // NOI18N
         btPedido.setText("Pedido");
+        btPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPedidoActionPerformed(evt);
+            }
+        });
 
         btReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_bed_415896.png"))); // NOI18N
         btReserva.setText("Reserva");
@@ -233,6 +238,12 @@ public class Frm_inicial extends javax.swing.JFrame {
         new Frm_cadastroQuarto().setVisible(true);
         dispose();
     }//GEN-LAST:event_opCadastroQuartoActionPerformed
+
+    private void btPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoActionPerformed
+        // TODO add your handling code here:
+        new Frm_pedido().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btPedidoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

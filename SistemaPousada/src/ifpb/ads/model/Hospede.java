@@ -16,7 +16,6 @@ public class Hospede extends Pessoa implements StrategyCrudPessoa {
     private String email;
 
     public Hospede() {
-        System.out.println("instanciou o hospede");
         adpHospede = new AdapterHospede();
     }
 
