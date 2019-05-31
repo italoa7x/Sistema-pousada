@@ -6,13 +6,12 @@
 package ifpb.ads.control;
 
 import ifpb.ads.model.Extra;
-import ifpb.ads.strategy.StrategyExtra;
 
 /**
  *
  * @author italo
  */
-public class ControlerExtra implements StrategyExtra {
+public class ControlerExtra{
 
     private Extra extra;
 
@@ -20,7 +19,6 @@ public class ControlerExtra implements StrategyExtra {
         extra = new Extra();
     }
 
-    @Override
     public Object read() throws Exception {
         return extra.read();
     }

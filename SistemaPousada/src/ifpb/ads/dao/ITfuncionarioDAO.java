@@ -14,7 +14,7 @@ public interface ITfuncionarioDAO {
 
     public boolean delete(int id) throws Exception;
     
-    public Object acessSystem(String name, String cpf) throws Exception;
+    public Object acessSystem(String cpf) throws Exception;
 
     public void fecharConexoes();
 }

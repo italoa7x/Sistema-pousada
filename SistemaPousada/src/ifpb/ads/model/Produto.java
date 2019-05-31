@@ -1,7 +1,7 @@
 package ifpb.ads.model;
 
-import ifpb.ads.dao.ITprodutoDAO;
-import ifpb.ads.dao.ProdutoDAO;
+import ifpb.ads.dao.Adapter.AdapterProduto;
+import ifpb.ads.dao.Adapter.ServicePessoa;
 import ifpb.ads.strategy.StrategyCrudPessoa;
 
 /**
@@ -14,10 +14,10 @@ public class Produto implements StrategyCrudPessoa{
     private double value;
     private int id;
     
-    private ITprodutoDAO daoProduto;
+    private ServicePessoa daoProduto;
 
     public Produto() {
-        daoProduto = new ProdutoDAO();
+        daoProduto = new AdapterProduto();
     }
     
     
@@ -55,12 +55,12 @@ public class Produto implements StrategyCrudPessoa{
 
     @Override
     public boolean save(Object obj) throws Exception {
-        return daoProduto.create(obj);
+        return daoProduto.salvar(obj);
     }
 
     @Override
     public Object read() throws Exception {
-        return daoProduto.read();
+        return daoProduto.exibir();
     }
 
     @Override
@@ -70,7 +70,12 @@ public class Produto implements StrategyCrudPessoa{
 
     @Override
     public boolean delete(int id) throws Exception {
-        return daoProduto.delete(id);
+        return daoProduto.excluir(id);
+    }
+
+    @Override
+    public Object search(String name) throws Exception {
+        return daoProduto.buscar_por_nome(name);
     }
 
     

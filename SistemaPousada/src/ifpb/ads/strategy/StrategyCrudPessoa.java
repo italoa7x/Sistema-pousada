@@ -14,5 +14,6 @@ public interface StrategyCrudPessoa {
 
     public boolean delete(int id) throws Exception;
     
+    public Object search(String name) throws Exception;
     
 }

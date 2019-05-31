@@ -35,5 +35,10 @@ public class Controler_Produto implements StrategyCrudPessoa{
         return produto.delete(id);
     }
 
+    @Override
+    public Object search(String name) throws Exception {
+        return produto.search(name);
+    }
+
  
 }

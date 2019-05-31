@@ -107,7 +107,7 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -133,7 +133,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="516" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="471" max="32767" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -185,7 +185,7 @@
                   <Component id="btReserva" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btPagamento" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="107" max="32767" attributes="0"/>
+                  <EmptySpace pref="56" max="32767" attributes="0"/>
                   <Component id="btSair" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -195,6 +195,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btCadastro">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ifpb/ads/icones/iconfinder_add_user_309049_1.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cadastro"/>
           </Properties>
           <Events>
@@ -203,21 +206,33 @@
         </Component>
         <Component class="javax.swing.JButton" name="btPedido">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ifpb/ads/icones/iconfinder_notepad_285631.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Pedido"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btReserva">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ifpb/ads/icones/iconfinder_bed_415896.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Reserva"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btPagamento">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ifpb/ads/icones/iconfinder_money_172506.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Pagamento"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btSair">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ifpb/ads/icones/iconfinder_Login_in_85205_1.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
           <Events>

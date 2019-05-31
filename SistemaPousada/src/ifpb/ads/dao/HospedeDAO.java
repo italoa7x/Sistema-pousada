@@ -33,7 +33,7 @@ public class HospedeDAO implements IThospedeDAO {
             pst.execute();
             return true;
         } catch (Exception e) {
-            throw new Exception("Erro ao salvar cliente. "+e.getMessage());
+            throw new Exception("Erro ao salvar cliente. " + e.getMessage());
         }
     }
 
@@ -41,11 +41,11 @@ public class HospedeDAO implements IThospedeDAO {
     public HospedeDTO read() throws Exception {
         HospedeDTO retorno = new HospedeDTO();
         ArrayList<HospedeDTO> vetor = new ArrayList<HospedeDTO>();
-        try{
+        try {
             String sql = "SELECT *FROM hospede";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 HospedeDTO h = new HospedeDTO();
                 h.setName(rs.getString("nome"));
                 h.setCpf(rs.getString("cpf"));
@@ -55,7 +55,7 @@ public class HospedeDAO implements IThospedeDAO {
                 vetor.add(h);
             }
             retorno.setAllHospedes(vetor);
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new Exception("Erro ao consultar hospedes. " + e.getMessage());
         }
         return retorno;
@@ -63,19 +63,19 @@ public class HospedeDAO implements IThospedeDAO {
 
     @Override
     public boolean delete(int id) throws Exception {
-         try{
+        try {
             pst = con.prepareStatement("DELETE FROM hospede WHERE id = ?");
             pst.setInt(1, id);
             pst.execute();
             return true;
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new Exception("Erro ao excluir hospede. " + e.getMessage());
         }
     }
 
     @Override
     public boolean update(HospedeDTO obj) throws Exception {
-        try{
+        try {
             HospedeDTO hospede = (HospedeDTO) obj;
             pst = con.prepareStatement("UPDATE hospede SET nome = ?, cpf = ?, email = ?, telefone = ? WHERE id = ?");
             pst.setString(1, hospede.getName());
@@ -85,8 +85,31 @@ public class HospedeDAO implements IThospedeDAO {
             pst.setInt(5, hospede.getId());
             pst.executeUpdate();
             return true;
-        }catch(Exception e){
-            throw new Exception("Erro ao atualizar dado do hospede. " +e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("Erro ao atualizar dado do hospede. " + e.getMessage());
+        }
+    }
+
+    @Override
+    public HospedeDTO search(String name) throws Exception {
+        System.out.println(name);
+        try {
+            HospedeDTO retorno = new HospedeDTO();
+            String sql = "SELECT *FROM hospede WHERE nome LIKE ?";
+            pst = con.prepareStatement(sql);
+            pst.setString(1, "%" + name + "%");
+
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                retorno.setCpf(rs.getString("cpf"));
+                retorno.setName(rs.getString("nome"));
+                retorno.setId(rs.getInt("id"));
+                retorno.setEmail(rs.getString("email"));
+                retorno.setTelephone(rs.getString("telefone"));
+            }
+            return retorno;
+        } catch (Exception e) {
+            throw new Exception("Erro ao consultar hospedes. " + e.getMessage());
         }
     }
 

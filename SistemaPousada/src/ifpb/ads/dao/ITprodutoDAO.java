@@ -1,5 +1,7 @@
 package ifpb.ads.dao;
 
+import ifpb.ads.dto.ProdutoDTO;
+
 /**
  *
  * @author Italo
@@ -12,4 +14,5 @@ public interface ITprodutoDAO {
 
     public boolean delete(int id) throws Exception;
 
+    public ProdutoDTO search(String name) throws Exception;
 }

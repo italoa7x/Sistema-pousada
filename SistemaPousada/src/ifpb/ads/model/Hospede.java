@@ -1,7 +1,8 @@
 package ifpb.ads.model;
 
+import ifpb.ads.dao.Adapter.AdapterHospede;
+import ifpb.ads.dao.Adapter.ServicePessoa;
 import ifpb.ads.dao.HospedeDAO;
-import ifpb.ads.dao.IThospedeDAO;
 import ifpb.ads.dto.HospedeDTO;
 import ifpb.ads.strategy.StrategyCrudPessoa;
 
@@ -9,15 +10,15 @@ import ifpb.ads.strategy.StrategyCrudPessoa;
  *
  * @author Italo
  */
-public class Hospede extends Pessoa implements StrategyCrudPessoa{
-    private IThospedeDAO daoHospede;
+public class Hospede extends Pessoa implements StrategyCrudPessoa {
+
+    private ServicePessoa adpHospede;
+    private String email;
 
     public Hospede() {
-        daoHospede = new HospedeDAO();
+        System.out.println("instanciou o hospede");
+        adpHospede = new AdapterHospede();
     }
-    
-    
-    private String email;
 
     public String getEmail() {
         return email;
@@ -29,21 +30,26 @@ public class Hospede extends Pessoa implements StrategyCrudPessoa{
 
     @Override
     public boolean save(Object obj) throws Exception {
-        return daoHospede.create((HospedeDTO) obj);
+        return adpHospede.salvar((HospedeDTO) obj);
     }
 
     @Override
     public Object read() throws Exception {
-        return daoHospede.read();
+        return adpHospede.exibir();
     }
 
     @Override
     public boolean update(Object obj) throws Exception {
-        return daoHospede.update((HospedeDTO) obj);
+        return adpHospede.atualizar((HospedeDTO) obj);
     }
 
     @Override
     public boolean delete(int id) throws Exception {
-        return daoHospede.delete(id);
+        return adpHospede.excluir(id);
+    }
+
+    @Override
+    public Object search(String name) throws Exception {
+        return (HospedeDTO) adpHospede.buscar_por_nome(name);
     }
 }

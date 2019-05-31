@@ -82,4 +82,12 @@ public class Quarto implements StrategyCrudPessoa {
         return daoQuarto.delete(id);
     }
 
+    public ArrayList<String> verExtras(int idQuarto) throws Exception{
+        return daoQuarto.viewAllExtras(idQuarto);
+    }
+
+    @Override
+    public Object search(String name) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

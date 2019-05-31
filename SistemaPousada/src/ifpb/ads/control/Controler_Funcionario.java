@@ -15,8 +15,8 @@ public class Controler_Funcionario implements StrategyCrudPessoa{
         funcionario = new Funcionario();
     }
     
-    public FuncionarioDTO acessSistem(String name, String cpf) throws Exception{
-        return funcionario.acessSystem(name, cpf);
+    public FuncionarioDTO acessSistem(String cpf) throws Exception{
+        return funcionario.acessSystem(cpf);
     }
     
     @Override
@@ -41,6 +41,11 @@ public class Controler_Funcionario implements StrategyCrudPessoa{
     
     public void fecharConexoes(){
         funcionario.fecharConexoes();
+    }
+
+    @Override
+    public Object search(String name) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

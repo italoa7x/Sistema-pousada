@@ -8,7 +8,6 @@ package ifpb.ads.view;
 import ifpb.ads.control.ControlerExtra;
 import ifpb.ads.dto.ExtraDTO;
 import ifpb.ads.iterator.IteratorExtraDTO;
-import ifpb.ads.strategy.StrategyExtra;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class Frm_escolherExtra extends javax.swing.JFrame {
 
     private Frm_cadastroQuarto tela;
-    private StrategyExtra controlExtra;
+    private ControlerExtra controlExtra;
 
     public Frm_escolherExtra(Frm_cadastroQuarto atual) {
         initComponents();

@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public  class ConnectionFactory {
-    private static final String USER = "root";
-    private static final String PASS = "root";
-    private static final String URL = "jdbc:mysql://localhost:3306/db_pousada";
+    private static final String USER = "postgres";
+    private static final String PASS = "postgres";
+    private static final String URL = "jdbc:postgresql://localhost:5432/db_pousada";
     
     public Connection initConection(){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
             return DriverManager.getConnection(URL, USER, PASS);
         } catch (ClassNotFoundException | SQLException ex) {
             throw new RuntimeException("Erro na conexão. " + ex.getMessage());

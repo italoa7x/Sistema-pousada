@@ -2,6 +2,7 @@ package ifpb.ads.control;
 
 import ifpb.ads.model.Quarto;
 import ifpb.ads.strategy.StrategyCrudPessoa;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,4 +37,12 @@ public class Controler_Quarto implements StrategyCrudPessoa{
         return quarto.delete(id);
     }
 
+    public ArrayList<String> verExtras(int idQuarto) throws Exception{
+        return quarto.verExtras(idQuarto);
+    }
+
+    @Override
+    public Object search(String name) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

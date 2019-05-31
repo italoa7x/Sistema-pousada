@@ -10,6 +10,7 @@ import ifpb.ads.dto.ExtraDTO;
 import ifpb.ads.dto.QuartoDTO;
 import ifpb.ads.iterator.IteratorQuartoDTO;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -122,7 +123,7 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
 
         tbl_quarto.setModel(new javax.swing.table.DefaultTableModel(
@@ -150,6 +151,11 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
         });
 
         btVerExtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_bed_415896.png"))); // NOI18N
+        btVerExtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVerExtrasActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Acomodações");
 
@@ -363,7 +369,7 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
         try {
             // pega os dados do quarto que foram inseridos nos campos.
             int acomodacoes = Integer.parseInt(campoAcomodacoes.getText());
-            float  diaria = Float.parseFloat(campoDiaria.getText());
+            float diaria = Float.parseFloat(campoDiaria.getText());
             String status = campoStatus.getText();
             // preenche o objeto quartodto
             QuartoDTO quarto = new QuartoDTO();
@@ -391,6 +397,21 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
 
+    private void btVerExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerExtrasActionPerformed
+        // TODO add your handling code here:
+        try {
+            int linha = tbl_quarto.getSelectedRow();
+            if (linha != -1) {
+                int idQuarto = Integer.parseInt((String) tbl_quarto.getValueAt(linha, 0));
+                ArrayList<String> extras = controleQuarto.verExtras(idQuarto);
+                JOptionPane.showMessageDialog(null, extras.toString());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+    }//GEN-LAST:event_btVerExtrasActionPerformed
+
     private void habilitarCampos() {
         campoAcomodacoes.setEditable(true);
         campoDiaria.setEditable(true);
@@ -402,40 +423,6 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
         tbl_extras.removeAll();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm_cadastroQuarto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm_cadastroQuarto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm_cadastroQuarto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm_cadastroQuarto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Frm_cadastroQuarto().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btExcluir;

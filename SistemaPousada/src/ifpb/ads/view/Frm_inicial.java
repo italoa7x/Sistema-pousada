@@ -54,11 +54,12 @@ public class Frm_inicial extends javax.swing.JFrame {
 
         jMenuItem3.setText("jMenuItem3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("MENU RÁPIDO"));
 
+        btCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_add_user_309049_1.png"))); // NOI18N
         btCadastro.setText("Cadastro");
         btCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,12 +67,16 @@ public class Frm_inicial extends javax.swing.JFrame {
             }
         });
 
+        btPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_notepad_285631.png"))); // NOI18N
         btPedido.setText("Pedido");
 
+        btReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_bed_415896.png"))); // NOI18N
         btReserva.setText("Reserva");
 
+        btPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_money_172506.png"))); // NOI18N
         btPagamento.setText("Pagamento");
 
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_Login_in_85205_1.png"))); // NOI18N
         btSair.setText("Sair");
         btSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +112,7 @@ public class Frm_inicial extends javax.swing.JFrame {
                 .addComponent(btReserva)
                 .addGap(30, 30, 30)
                 .addComponent(btPagamento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(btSair)
                 .addContainerGap())
         );
@@ -182,7 +187,7 @@ public class Frm_inicial extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 516, Short.MAX_VALUE)
+                .addGap(0, 471, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(

@@ -2,13 +2,12 @@ package ifpb.ads.model;
 
 import ifpb.ads.dao.ExtraDAO;
 import ifpb.ads.dao.ITextraDAO;
-import ifpb.ads.strategy.StrategyExtra;
 
 /**
  *
  * @author Italo
  */
-public class Extra implements StrategyExtra {
+public class Extra{
 
     private String extra;
     private int id;
@@ -35,7 +34,6 @@ public class Extra implements StrategyExtra {
     }
 
 
-    @Override
     public Object read() throws Exception {
         return daoExtra.read();
     }

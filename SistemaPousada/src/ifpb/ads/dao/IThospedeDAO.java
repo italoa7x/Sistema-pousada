@@ -20,4 +20,6 @@ public interface IThospedeDAO {
     public boolean delete(int id) throws Exception;
 
     public boolean update(HospedeDTO obj) throws Exception;
+    
+    public HospedeDTO search(String name) throws Exception;
 }

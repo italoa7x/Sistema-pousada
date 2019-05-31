@@ -28,7 +28,7 @@ public class ProdutoDAO implements ITprodutoDAO {
 
     @Override
     public boolean create(Object obj) throws Exception {
-         try{
+        try {
             ProdutoDTO produto = (ProdutoDTO) obj;
             pst = con.prepareStatement("INSERT INTO produto(nome,valor,quantidade) VALUES (?,?,?)");
             pst.setString(1, produto.getName());
@@ -36,8 +36,8 @@ public class ProdutoDAO implements ITprodutoDAO {
             pst.setInt(3, produto.getAmount());
             pst.executeUpdate();
             return true;
-        }catch(Exception e){
-            throw new Exception("Erro ao salva funcionário. " +e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("Erro ao salva funcionário. " + e.getMessage());
         }
     }
 
@@ -70,6 +70,24 @@ public class ProdutoDAO implements ITprodutoDAO {
             pst.setInt(1, id);
             pst.execute();
             return true;
+        } catch (Exception e) {
+            throw new Exception("Erro ao excluir produto. " + e.getMessage());
+        }
+    }
+
+    @Override
+    public ProdutoDTO search(String name) throws Exception {
+        try {
+            ProdutoDTO produto = new ProdutoDTO();
+            pst = con.prepareStatement("SELECT *FROM produto WHERE nome LIKE ? LIMIT 1");
+            pst.setString(1, name);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                produto.setName(rs.getString("nome"));
+                produto.setValue(rs.getFloat("valor"));
+                produto.setId(rs.getInt("id"));
+            }
+            return produto;
         } catch (Exception e) {
             throw new Exception("Erro ao excluir produto. " + e.getMessage());
         }

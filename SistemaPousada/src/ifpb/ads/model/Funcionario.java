@@ -1,7 +1,8 @@
 package ifpb.ads.model;
 
+import ifpb.ads.dao.Adapter.AdapterFuncionario;
+import ifpb.ads.dao.Adapter.ServicePessoa;
 import ifpb.ads.dao.FuncionarioDAO;
-import ifpb.ads.dao.ITfuncionarioDAO;
 import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.strategy.StrategyCrudPessoa;
 
@@ -11,10 +12,12 @@ import ifpb.ads.strategy.StrategyCrudPessoa;
  */
 public class Funcionario extends Pessoa implements StrategyCrudPessoa{
     private String cargo;
-    private ITfuncionarioDAO daoFuncionario;
-
+    private ServicePessoa daoFuncionario;
+    private FuncionarioDAO fechaCon;
+    
     public Funcionario() {
-        daoFuncionario = new FuncionarioDAO();
+        daoFuncionario = new AdapterFuncionario();
+        fechaCon = new FuncionarioDAO();
     }
     
     
@@ -26,35 +29,40 @@ public class Funcionario extends Pessoa implements StrategyCrudPessoa{
         this.cargo = cargo;
     }
     
-    public FuncionarioDTO acessSystem(String name, String cpf) throws Exception{
-        return (FuncionarioDTO) daoFuncionario.acessSystem(name, cpf);
+    public FuncionarioDTO acessSystem(String cpf) throws Exception{
+        return (FuncionarioDTO) daoFuncionario.acessar_sistema(cpf);
     }
 
     @Override
     public boolean save(Object obj) throws Exception {
-        return daoFuncionario.create(obj);
+        return daoFuncionario.salvar(obj);
     }
 
     @Override
     public Object read() throws Exception {
-        return daoFuncionario.read();
+        return daoFuncionario.exibir();
     }
 
     @Override
     public boolean update(Object obj) throws Exception {
-        return daoFuncionario.update(obj);
+        return daoFuncionario.atualizar(obj);
     }
 
     @Override
     public boolean delete(int id) throws Exception {
-        return daoFuncionario.delete(id);
+        return daoFuncionario.excluir(id);
     }
     
     public void fecharConexoes(){
-        daoFuncionario.fecharConexoes();
+        fechaCon.fecharConexoes();
     }
 
-    public Object acessSistem(String name, String cpf) throws Exception {
-        return daoFuncionario.acessSystem(name, cpf);
+    public Object acessSistem(String cpf) throws Exception {
+        return daoFuncionario.acessar_sistema(cpf);
+    }
+
+    @Override
+    public Object search(String name) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

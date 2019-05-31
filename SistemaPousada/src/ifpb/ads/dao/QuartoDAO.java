@@ -93,4 +93,22 @@ public class QuartoDAO implements ITquartoDAO {
         }
     }
 
+    @Override
+    public ArrayList<String> viewAllExtras(int idQuarto) throws Exception {
+        ArrayList<String> extras = new ArrayList<String>();
+        try{
+            pst = con.prepareStatement("select e.extra from quarto_extra qe inner join quarto as q on (q.id = qe.id_quarto)\n" +
+"inner join extra as e on (qe.id_extra = e.id) where q.id = ?");
+            pst.setInt(1, idQuarto);
+            rs = pst.executeQuery();
+            
+            while(rs.next()){
+                extras.add(rs.getString("extra"));
+            }
+        }catch(Exception e){
+            throw new Exception("Erro ao buscar extras do quarto.");
+        }
+        return extras;
+    }
+
 }

@@ -16,4 +16,6 @@ public interface ITquartoDAO {
     public boolean delete(int id) throws Exception;
     
     public boolean salvarExtras(ArrayList<ExtraDTO> lista, int idQuarto) throws Exception;
+    
+    public ArrayList<String> viewAllExtras(int idQuarto) throws Exception;
 }
