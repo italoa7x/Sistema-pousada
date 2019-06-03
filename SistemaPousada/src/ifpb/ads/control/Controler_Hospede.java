@@ -1,13 +1,13 @@
 package ifpb.ads.control;
 
 import ifpb.ads.model.Hospede;
-import ifpb.ads.strategy.StrategyCrudPessoa;
+import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
  * @author Italo
  */
-public class Controler_Hospede implements StrategyCrudPessoa{
+public class Controler_Hospede implements StrategyCrud{
     private Hospede hospede;
 
     public Controler_Hospede() {

@@ -32,7 +32,6 @@ public class AdapterHospede extends HospedeDAO implements ServicePessoa {
 
     @Override
     public Object buscar_por_nome(String nome) throws Exception {
-        System.out.println("entrou no adapter");
         return (HospedeDTO) super.search(nome);
     }
 

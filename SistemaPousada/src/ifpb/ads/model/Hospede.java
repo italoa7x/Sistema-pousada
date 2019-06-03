@@ -4,13 +4,13 @@ import ifpb.ads.dao.Adapter.AdapterHospede;
 import ifpb.ads.dao.Adapter.ServicePessoa;
 import ifpb.ads.dao.HospedeDAO;
 import ifpb.ads.dto.HospedeDTO;
-import ifpb.ads.strategy.StrategyCrudPessoa;
+import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
  * @author Italo
  */
-public class Hospede extends Pessoa implements StrategyCrudPessoa {
+public class Hospede extends Pessoa implements StrategyCrud {
 
     private ServicePessoa adpHospede;
     private String email;

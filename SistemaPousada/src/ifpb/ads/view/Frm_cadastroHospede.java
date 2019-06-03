@@ -6,11 +6,10 @@
 package ifpb.ads.view;
 
 import ifpb.ads.control.Controler_Hospede;
-import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.dto.HospedeDTO;
-import ifpb.ads.iterator.IteratorFuncionarioDTO;
 import ifpb.ads.iterator.IteratorHospedeDTO;
-import ifpb.ads.strategy.StrategyCrudPessoa;
+import ifpb.ads.view.factoryControl.FactoryHospede;
+import ifpb.ads.view.factoryControl.ITfactory;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,11 +22,13 @@ public class Frm_cadastroHospede extends javax.swing.JFrame {
     /**
      * Creates new form Frm_cadastroFuncionario
      */
-    private StrategyCrudPessoa controleHospede;
-
+    private Controler_Hospede controleHospede;
+    private ITfactory fabricaHospede;
+    
     public Frm_cadastroHospede() {
         initComponents();
-        controleHospede = (StrategyCrudPessoa) new Controler_Hospede();
+        fabricaHospede = new FactoryHospede();
+        controleHospede = (Controler_Hospede) fabricaHospede.gerar("control");
 
         this.preencherTabela();
 
@@ -281,7 +282,7 @@ public class Frm_cadastroHospede extends javax.swing.JFrame {
             String telefone = campoTelefone.getText();
             
             // instancia um novo hospedeDTO que será usado como "moeda" de transferência de dados.
-            HospedeDTO novo = new HospedeDTO();
+            HospedeDTO novo = (HospedeDTO) fabricaHospede.gerar("dto");
             // seta os dados do funcionário.
             novo.setName(nome);
             novo.setCpf(cpf);

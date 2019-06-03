@@ -9,8 +9,9 @@ import ifpb.ads.control.Controler_Quarto;
 import ifpb.ads.dto.ExtraDTO;
 import ifpb.ads.dto.QuartoDTO;
 import ifpb.ads.iterator.IteratorQuartoDTO;
+import ifpb.ads.view.factoryControl.FactoryQuarto;
+import ifpb.ads.view.factoryControl.ITfactory;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,10 +25,13 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
      * Creates new form Frm_cadastroQuarto
      */
     private Controler_Quarto controleQuarto;
-
+    private ITfactory fabricaQuarto;
+    
     public Frm_cadastroQuarto() {
         initComponents();
-        controleQuarto = new Controler_Quarto();
+        fabricaQuarto = new FactoryQuarto();
+        controleQuarto = (Controler_Quarto) fabricaQuarto.gerar("control");
+        
         preencherTabela();
     }
 
@@ -372,7 +376,7 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
             float diaria = Float.parseFloat(campoDiaria.getText());
             String status = campoStatus.getText();
             // preenche o objeto quartodto
-            QuartoDTO quarto = new QuartoDTO();
+            QuartoDTO quarto = (QuartoDTO) fabricaQuarto.gerar("dto");
             quarto.setAccommodations(acomodacoes);
             quarto.setDaily(diaria);
             quarto.setStatus(status);

@@ -4,14 +4,14 @@ import ifpb.ads.dao.ITquartoDAO;
 import ifpb.ads.dao.QuartoDAO;
 import ifpb.ads.dto.ExtraDTO;
 import ifpb.ads.dto.QuartoDTO;
-import ifpb.ads.strategy.StrategyCrudPessoa;
 import java.util.ArrayList;
+import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
  * @author Italo
  */
-public class Quarto implements StrategyCrudPessoa {
+public class Quarto implements StrategyCrud {
 
     private int accommodations;
     private double daily;

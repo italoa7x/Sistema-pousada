@@ -80,7 +80,7 @@ public class ProdutoDAO implements ITprodutoDAO {
         try {
             ProdutoDTO produto = new ProdutoDTO();
             pst = con.prepareStatement("SELECT *FROM produto WHERE nome LIKE ? LIMIT 1");
-            pst.setString(1, "%"+name+"%");
+            pst.setString(1, "%" + name + "%");
             rs = pst.executeQuery();
             while (rs.next()) {
                 produto.setName(rs.getString("nome"));
@@ -91,6 +91,35 @@ public class ProdutoDAO implements ITprodutoDAO {
         } catch (Exception e) {
             throw new Exception("Erro ao excluir produto. " + e.getMessage());
         }
+    }
+
+    @Override
+    public boolean subtrairEstoque(int idProd, int quantSubtraida) throws Exception {
+        try {
+            int quantidadeProd = this.buscaQuantidade(idProd);
+            pst = con.prepareStatement("UPDATE produto SET quantidade = ? WHERE id = ?");
+            pst.setInt(1, quantidadeProd - quantSubtraida);
+            pst.setInt(2, idProd);
+            pst.execute();
+            return true;
+        } catch (Exception e) {
+            throw new Exception("Erro ao subtrair produto. " + e.getMessage());
+        }
+    }
+
+    @Override
+    public int buscaQuantidade(int idProduto) throws Exception {
+        try {
+            pst = con.prepareStatement("SELECT quantidade as quant FROM produto WHERE id = ?");
+            pst.setInt(1, idProduto);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("quant");
+            }
+        } catch (Exception e) {
+            throw new Exception("Erro ao buscar quantidade de produtos. " + e.getMessage());
+        }
+        return 0;
     }
 
 }

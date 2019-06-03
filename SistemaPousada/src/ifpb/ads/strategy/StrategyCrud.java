@@ -4,7 +4,7 @@ package ifpb.ads.strategy;
  *
  * @author Italo
  */
-public interface StrategyCrudPessoa {
+public interface StrategyCrud {
 
     public boolean save(Object obj) throws Exception;
 

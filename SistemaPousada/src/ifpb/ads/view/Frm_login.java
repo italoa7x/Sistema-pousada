@@ -7,7 +7,8 @@ package ifpb.ads.view;
 
 import ifpb.ads.control.Controler_Funcionario;
 import ifpb.ads.dto.FuncionarioDTO;
-import ifpb.ads.strategy.StrategyCrudPessoa;
+import ifpb.ads.view.factoryControl.FactoryFuncionario;
+import ifpb.ads.view.factoryControl.ITfactory;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,10 +21,12 @@ public class Frm_login extends javax.swing.JFrame {
      * Creates new form bfxh
      */
     private Controler_Funcionario controleFuncionario;
-
+    private ITfactory fabricaFuncionario;
+    
     public Frm_login() {
         initComponents();
-        controleFuncionario = new Controler_Funcionario();
+        fabricaFuncionario = new FactoryFuncionario();
+        controleFuncionario = (Controler_Funcionario) fabricaFuncionario.gerar("control");
     }
 
     /**
@@ -128,15 +131,17 @@ public class Frm_login extends javax.swing.JFrame {
 
     private void bt_acessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_acessarActionPerformed
         // TODO add your handling code here:
+        FuncionarioDTO logado = (FuncionarioDTO) fabricaFuncionario.gerar("dto");
         try {
             String cpf = this.area_cpf.getText();
             if (cpf.equals("111.1111.111-11")) {
-                new Frm_inicial().setVisible(true);
+                logado.setCpf(cpf);
+                new Frm_inicial(logado).setVisible(true);
                 dispose();
             } else {
-                FuncionarioDTO logado = (FuncionarioDTO) controleFuncionario.acessSistem(cpf);
+                logado = (FuncionarioDTO) controleFuncionario.acessSistem(cpf);
                 if (logado.getId() > 0) {
-                    new Frm_inicial().setVisible(true);
+                    new Frm_inicial(logado).setVisible(true);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Funcionário não cadastrado.");
@@ -152,7 +157,7 @@ public class Frm_login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btSairActionPerformed
 
-     public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

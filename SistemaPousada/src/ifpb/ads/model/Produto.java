@@ -3,13 +3,13 @@ package ifpb.ads.model;
 import ifpb.ads.dao.Adapter.AdapterProduto;
 import ifpb.ads.dao.Adapter.ServicePessoa;
 import ifpb.ads.dto.ProdutoDTO;
-import ifpb.ads.strategy.StrategyCrudPessoa;
+import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
  * @author Italo
  */
-public class Produto implements StrategyCrudPessoa{
+public class Produto implements StrategyCrud{
     private String name;
     private int amount;
     private double value;

@@ -6,13 +6,13 @@
 package ifpb.ads.view;
 
 import ifpb.ads.control.Controler_Produto;
-import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.dto.ProdutoDTO;
-import ifpb.ads.iterator.IteratorFuncionarioDTO;
 import ifpb.ads.iterator.IteratorProdutoDTO;
-import ifpb.ads.strategy.StrategyCrudPessoa;
+import ifpb.ads.view.factoryControl.FactoryProduto;
+import ifpb.ads.view.factoryControl.ITfactory;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
@@ -23,11 +23,13 @@ public class Frm_cadastroProduto extends javax.swing.JFrame {
     /**
      * Creates new form Frm_cadastroFuncionario
      */
-    private StrategyCrudPessoa controleProduto;
-
+    private Controler_Produto controleProduto;
+    private ITfactory fabricaProdutos;
+    
     public Frm_cadastroProduto() {
         initComponents();
-        controleProduto = (StrategyCrudPessoa) new Controler_Produto();
+        fabricaProdutos = new FactoryProduto();
+        controleProduto = (Controler_Produto) fabricaProdutos.gerar("control");
 
         this.preencherTabela();
 
@@ -249,7 +251,7 @@ public class Frm_cadastroProduto extends javax.swing.JFrame {
             int quantidade = Integer.parseInt(campoQtd.getText());
             
             // instancia um novo produtoDTO que será usado como "moeda" de transferência de dados.
-            ProdutoDTO novo = new ProdutoDTO();
+            ProdutoDTO novo = (ProdutoDTO) fabricaProdutos.gerar("dto");
             // seta os dados do produto.
             novo.setName(nome);
             novo.setAmount(quantidade);

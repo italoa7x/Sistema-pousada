@@ -6,10 +6,19 @@
 package ifpb.ads.view;
 
 import ifpb.ads.control.Controler_Hospede;
+import ifpb.ads.control.Controler_Pedido;
 import ifpb.ads.control.Controler_Produto;
+import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.dto.HospedeDTO;
+import ifpb.ads.dto.PedidoDTO;
 import ifpb.ads.dto.ProdutoDTO;
+import ifpb.ads.view.factoryControl.FactoryHospede;
+import ifpb.ads.view.factoryControl.FactoryPedido;
+import ifpb.ads.view.factoryControl.FactoryProduto;
+import ifpb.ads.view.factoryControl.ITfactory;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,11 +33,22 @@ public class Frm_pedido extends javax.swing.JFrame {
      */
     private Controler_Hospede controleHospede;
     private Controler_Produto controleProduto;
+    private Controler_Pedido controlePedido;
+    private ITfactory fabricaHospede, fabricaProduto, fabricaPedido;
+    private FuncionarioDTO funcionarioLogado;
 
-    public Frm_pedido() {
+    public Frm_pedido(FuncionarioDTO logadoAtual) {
         initComponents();
-        controleHospede = new Controler_Hospede();
-        controleProduto = new Controler_Produto();
+        funcionarioLogado = logadoAtual;
+        // instanciamento das fábricas.
+        fabricaHospede = new FactoryHospede();
+        fabricaProduto = new FactoryProduto();
+        fabricaPedido = new FactoryPedido();
+        // usando as fábricass, sõ criados os objetos Controler.
+        controleHospede = (Controler_Hospede) fabricaHospede.gerar("control");
+        controleProduto = (Controler_Produto) fabricaProduto.gerar("control");
+        controlePedido = (Controler_Pedido) fabricaPedido.gerar("control");
+
     }
 
     /**
@@ -56,7 +76,6 @@ public class Frm_pedido extends javax.swing.JFrame {
         tbl_produtos = new javax.swing.JTable();
         btExcluirItem = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         areaPesquisaProduto = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -70,6 +89,7 @@ public class Frm_pedido extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         campoTotalCompras = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -177,6 +197,7 @@ public class Frm_pedido extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbl_produtos);
 
+        btExcluirItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_ic_delete_48px_352303.png"))); // NOI18N
         btExcluirItem.setText("Excluir Item");
         btExcluirItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,10 +207,9 @@ public class Frm_pedido extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar Produto"));
 
-        jButton1.setText("Selecionar da lista");
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_search_322497.png"))); // NOI18N
 
-        jLabel6.setText("Buscar Produto");
-
+        areaPesquisaProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         areaPesquisaProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 areaPesquisaProdutoKeyReleased(evt);
@@ -213,40 +233,32 @@ public class Frm_pedido extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(areaPesquisaProduto))
+                        .addComponent(areaNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(19, 19, 19)
+                        .addComponent(areaIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(areaNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                                .addComponent(jLabel8)
-                                .addGap(19, 19, 19)
-                                .addComponent(areaIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(areaValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addComponent(areaValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(areaPesquisaProduto))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel6)
-                    .addComponent(areaPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(areaPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
@@ -262,6 +274,7 @@ public class Frm_pedido extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Quntidade ");
 
+        areaQuantidadeProd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         areaQuantidadeProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 areaQuantidadeProdKeyPressed(evt);
@@ -279,6 +292,15 @@ public class Frm_pedido extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Produtos");
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_f-check_256_282474.png"))); // NOI18N
+        jButton1.setText("Finalizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -300,7 +322,7 @@ public class Frm_pedido extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,6 +334,10 @@ public class Frm_pedido extends javax.swing.JFrame {
                         .addGap(110, 110, 110)
                         .addComponent(btExcluirItem)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,16 +360,20 @@ public class Frm_pedido extends javax.swing.JFrame {
                         .addComponent(campoTotalCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
-                        .addComponent(areaQuantidadeProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(areaQuantidadeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btExcluirItem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +385,6 @@ public class Frm_pedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void areaPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areaPesquisaKeyPressed
-        // TODO add your handling code here:
 
 
     }//GEN-LAST:event_areaPesquisaKeyPressed
@@ -442,40 +471,45 @@ public class Frm_pedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btExcluirItemActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            PedidoDTO pedido = (PedidoDTO) fabricaPedido.gerar("dto");
+            int idHospede = Integer.parseInt(campoIdHospede.getText());
+            int idFuncionario = funcionarioLogado.getId();
+            pedido.setId_funcionario(idFuncionario);
+            pedido.setId_hospede(idHospede);
+            ArrayList<ProdutoDTO> listaProdutos = coletarProdutos();
+            
+            pedido.setListaProdutos(listaProdutos);
+            
+            if (listaProdutos.size() > 0 && idHospede > 0) {
+                if (controlePedido.save(pedido)) {
+                    JOptionPane.showMessageDialog(null, "Pedido finalizado.");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    // método responsável por coletar os produtos da tabela de produtos inseridos.
+    private ArrayList<ProdutoDTO> coletarProdutos() {
+        ArrayList<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
+        for (int i = 0; i < tbl_produtos.getModel().getRowCount(); i++) {
+            ProdutoDTO atual = (ProdutoDTO) fabricaProduto.gerar("dto");
+            int idProd = Integer.parseInt((String) tbl_produtos.getValueAt(i, 0));
+            int quantProd = Integer.parseInt((String) tbl_produtos.getValueAt(i, 3));
+            atual.setId(idProd);
+            atual.setAmount(quantProd);
+            lista.add(atual);
+        }
+        return lista;
+    }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm_pedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm_pedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm_pedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm_pedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Frm_pedido().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField areaIdProduto;

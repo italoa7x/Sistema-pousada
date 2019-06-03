@@ -19,7 +19,7 @@ public class Frm_escolherExtra extends javax.swing.JFrame {
 
     private Frm_cadastroQuarto tela;
     private ControlerExtra controlExtra;
-
+    
     public Frm_escolherExtra(Frm_cadastroQuarto atual) {
         initComponents();
         controlExtra = new ControlerExtra();

@@ -8,12 +8,22 @@ import java.util.ArrayList;
  * @author Italo
  */
 public class PedidoDTO {
+
     private int id_hospede;
-    private int id_produto;
+    private ArrayList<ProdutoDTO> listaProdutos;
     private int id_funcionario;
+    private int quantidade;
     private Date data;
     private int id;
     private ArrayList<PedidoDTO> allPedidos;
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 
     public ArrayList<PedidoDTO> getAllPedidos() {
         return allPedidos;
@@ -22,8 +32,6 @@ public class PedidoDTO {
     public void setAllPedidos(ArrayList<PedidoDTO> allPedidos) {
         this.allPedidos = allPedidos;
     }
-    
-    
 
     public int getId_hospede() {
         return id_hospede;
@@ -33,12 +41,12 @@ public class PedidoDTO {
         this.id_hospede = id_hospede;
     }
 
-    public int getId_produto() {
-        return id_produto;
+    public ArrayList<ProdutoDTO> getListaProdutos() {
+        return listaProdutos;
     }
 
-    public void setId_produto(int id_produto) {
-        this.id_produto = id_produto;
+    public void setListaProdutos(ArrayList<ProdutoDTO> listaProdutos) {
+        this.listaProdutos = listaProdutos;
     }
 
     public int getId_funcionario() {
@@ -64,7 +72,5 @@ public class PedidoDTO {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
-    
+
 }

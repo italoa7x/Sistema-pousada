@@ -5,6 +5,8 @@
  */
 package ifpb.ads.view;
 
+import ifpb.ads.dto.FuncionarioDTO;
+
 /**
  *
  * @author italo
@@ -14,8 +16,27 @@ public class Frm_inicial extends javax.swing.JFrame {
     /**
      * Creates new form Frm_inicial
      */
+    private FuncionarioDTO funcionarioLogado;
+
+    public Frm_inicial(FuncionarioDTO logado) {
+        initComponents();
+        this.funcionarioLogado = logado;
+
+        this.lblLogado.setText("Logado: " + funcionarioLogado.getName());
+    }
+
     public Frm_inicial() {
         initComponents();
+    }
+
+    private void verificaLogado() {
+        FuncionarioDTO adminLogado = new FuncionarioDTO();
+        if (funcionarioLogado.getCpf().equalsIgnoreCase("000.0000.000-00")) {
+            adminLogado.setId(000);
+            adminLogado.setName("MASTER");
+            adminLogado.setCargo("ADMIN");
+            funcionarioLogado = adminLogado;
+        }
     }
 
     /**
@@ -35,6 +56,7 @@ public class Frm_inicial extends javax.swing.JFrame {
         btReserva = new javax.swing.JButton();
         btPagamento = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
+        lblLogado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuRegistro = new javax.swing.JMenu();
         ooRegistroFuncionarios = new javax.swing.JMenuItem();
@@ -122,6 +144,8 @@ public class Frm_inicial extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        lblLogado.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+
         menuRegistro.setText("Registro");
 
         ooRegistroFuncionarios.setText("Funcionários");
@@ -192,12 +216,17 @@ public class Frm_inicial extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 471, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         setSize(new java.awt.Dimension(683, 438));
@@ -241,7 +270,7 @@ public class Frm_inicial extends javax.swing.JFrame {
 
     private void btPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedidoActionPerformed
         // TODO add your handling code here:
-        new Frm_pedido().setVisible(true);
+        new Frm_pedido(funcionarioLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_btPedidoActionPerformed
 
@@ -258,6 +287,7 @@ public class Frm_inicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblLogado;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenu menuInfo;
     private javax.swing.JMenu menuRegistro;

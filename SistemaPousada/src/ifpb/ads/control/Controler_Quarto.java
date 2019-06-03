@@ -1,14 +1,14 @@
 package ifpb.ads.control;
 
 import ifpb.ads.model.Quarto;
-import ifpb.ads.strategy.StrategyCrudPessoa;
 import java.util.ArrayList;
+import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
  * @author Italo
  */
-public class Controler_Quarto implements StrategyCrudPessoa{
+public class Controler_Quarto implements StrategyCrud{
     private Quarto quarto;
 
         

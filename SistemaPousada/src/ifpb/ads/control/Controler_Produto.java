@@ -2,13 +2,13 @@ package ifpb.ads.control;
 
 import ifpb.ads.dto.ProdutoDTO;
 import ifpb.ads.model.Produto;
-import ifpb.ads.strategy.StrategyCrudPessoa;
+import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
  * @author Italo
  */
-public class Controler_Produto implements StrategyCrudPessoa{
+public class Controler_Produto implements StrategyCrud{
     private Produto produto;
 
     public Controler_Produto() {

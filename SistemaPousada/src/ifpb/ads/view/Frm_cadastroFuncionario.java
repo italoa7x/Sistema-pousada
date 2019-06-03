@@ -8,8 +8,8 @@ package ifpb.ads.view;
 import ifpb.ads.control.Controler_Funcionario;
 import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.iterator.IteratorFuncionarioDTO;
-import ifpb.ads.strategy.StrategyCrudPessoa;
-import java.util.logging.Level;
+import ifpb.ads.view.factoryControl.FactoryFuncionario;
+import ifpb.ads.view.factoryControl.ITfactory;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,12 +22,13 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
     /**
      * Creates new form Frm_cadastroFuncionario
      */
-    private StrategyCrudPessoa controleFuncionario;
-
+    private Controler_Funcionario controleFuncionario;
+    private ITfactory fabricaFuncionario;
+    
     public Frm_cadastroFuncionario() {
         initComponents();
-        controleFuncionario = new Controler_Funcionario();
-
+        fabricaFuncionario = new FactoryFuncionario();
+        controleFuncionario = (Controler_Funcionario) fabricaFuncionario.gerar("control");
         this.preencherTabela();
 
     }
@@ -283,7 +284,7 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
             String telefone = campoTelefone.getText();
             
             // instancia um novo funcionárioDTO que será usado como "moeda" de transferência de dados.
-            FuncionarioDTO novo = new FuncionarioDTO();
+            FuncionarioDTO novo = (FuncionarioDTO) fabricaFuncionario.gerar("dto");
             // seta os dados do funcionário.
             novo.setName(nome);
             novo.setCargo(cargo);

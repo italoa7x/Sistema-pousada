@@ -2,13 +2,13 @@ package ifpb.ads.control;
 
 import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.model.Funcionario;
-import ifpb.ads.strategy.StrategyCrudPessoa;
+import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
  * @author Italo
  */
-public class Controler_Funcionario implements StrategyCrudPessoa{
+public class Controler_Funcionario implements StrategyCrud{
     private Funcionario funcionario;
 
     public Controler_Funcionario() {

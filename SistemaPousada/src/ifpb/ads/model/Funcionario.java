@@ -4,13 +4,13 @@ import ifpb.ads.dao.Adapter.AdapterFuncionario;
 import ifpb.ads.dao.Adapter.ServicePessoa;
 import ifpb.ads.dao.FuncionarioDAO;
 import ifpb.ads.dto.FuncionarioDTO;
-import ifpb.ads.strategy.StrategyCrudPessoa;
+import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
  * @author Italo
  */
-public class Funcionario extends Pessoa implements StrategyCrudPessoa{
+public class Funcionario extends Pessoa implements StrategyCrud{
     private String cargo;
     private ServicePessoa daoFuncionario;
     private FuncionarioDAO fechaCon;

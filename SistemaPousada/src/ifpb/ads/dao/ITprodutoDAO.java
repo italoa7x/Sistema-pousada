@@ -15,4 +15,8 @@ public interface ITprodutoDAO {
     public boolean delete(int id) throws Exception;
 
     public ProdutoDTO search(String name) throws Exception;
+    
+    public boolean subtrairEstoque(int idProd, int quantSubtraida) throws Exception;
+    
+    public int buscaQuantidade(int idProduto) throws Exception;
 }
