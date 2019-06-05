@@ -90,6 +90,7 @@ public class Frm_pedido extends javax.swing.JFrame {
         campoTotalCompras = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -302,6 +303,15 @@ public class Frm_pedido extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_Delete_1493279.png"))); // NOI18N
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -337,6 +347,8 @@ public class Frm_pedido extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(jButton1)
+                .addGap(32, 32, 32)
+                .addComponent(jButton2)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -363,7 +375,9 @@ public class Frm_pedido extends javax.swing.JFrame {
                         .addComponent(areaQuantidadeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btExcluirItem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
         );
 
@@ -438,6 +452,14 @@ public class Frm_pedido extends javax.swing.JFrame {
         areaNomeProduto.setText("");
         areaValorProduto.setText("");
     }
+    private void limparCamposGeral(){
+        this.areaQuantidadeProd.setText("");
+        this.campoEmailHospede.setText("");
+        this.campoIdHospede.setText("");
+        this.campoNomeHospede.setText("");
+        this.campoTelefoneHospede.setText("");
+        this.campoTotalCompras.setText("0");
+    }
     private void areaPesquisaProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areaPesquisaProdutoKeyReleased
         String nomeProd = areaPesquisaProduto.getText();
         try {
@@ -485,6 +507,9 @@ public class Frm_pedido extends javax.swing.JFrame {
             if (listaProdutos.size() > 0 && idHospede > 0) {
                 if (controlePedido.save(pedido)) {
                     JOptionPane.showMessageDialog(null, "Pedido finalizado.");
+                    this.limparCamposProduto();
+                    this.limparCamposGeral();
+                    
                 }
             }
         } catch (Exception e) {
@@ -492,6 +517,12 @@ public class Frm_pedido extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new Frm_inicial(funcionarioLogado).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // método responsável por coletar os produtos da tabela de produtos inseridos.
     private ArrayList<ProdutoDTO> coletarProdutos() {
@@ -525,6 +556,7 @@ public class Frm_pedido extends javax.swing.JFrame {
     private javax.swing.JTextField campoTelefoneHospede;
     private javax.swing.JLabel campoTotalCompras;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

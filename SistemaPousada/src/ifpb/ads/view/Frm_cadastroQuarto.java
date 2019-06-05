@@ -7,6 +7,7 @@ package ifpb.ads.view;
 
 import ifpb.ads.control.Controler_Quarto;
 import ifpb.ads.dto.ExtraDTO;
+import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.dto.QuartoDTO;
 import ifpb.ads.iterator.IteratorQuartoDTO;
 import ifpb.ads.view.factoryControl.FactoryQuarto;
@@ -26,12 +27,14 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
      */
     private Controler_Quarto controleQuarto;
     private ITfactory fabricaQuarto;
+    private FuncionarioDTO atualFLogado;
     
-    public Frm_cadastroQuarto() {
+    
+    public Frm_cadastroQuarto(FuncionarioDTO atualLogado) {
         initComponents();
         fabricaQuarto = new FactoryQuarto();
         controleQuarto = (Controler_Quarto) fabricaQuarto.gerar("control");
-        
+        atualLogado = atualLogado;
         preencherTabela();
     }
 
@@ -223,6 +226,7 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
                 .addGap(0, 24, Short.MAX_VALUE))
         );
 
+        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_ok_2639876.png"))); // NOI18N
         btSalvar.setText("Salvar");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,6 +234,7 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
             }
         });
 
+        btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_Login_out_85206.png"))); // NOI18N
         btVoltar.setText("voltar");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,7 +318,7 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSalvar)
                     .addComponent(btVoltar))
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 36, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(663, 430));
@@ -397,7 +402,7 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         // TODO add your handling code here:
-        new Frm_inicial().setVisible(true);
+        new Frm_inicial(atualFLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
 

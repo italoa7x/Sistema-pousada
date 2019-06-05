@@ -6,6 +6,7 @@
 package ifpb.ads.view;
 
 import ifpb.ads.control.Controler_Hospede;
+import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.dto.HospedeDTO;
 import ifpb.ads.iterator.IteratorHospedeDTO;
 import ifpb.ads.view.factoryControl.FactoryHospede;
@@ -24,12 +25,13 @@ public class Frm_cadastroHospede extends javax.swing.JFrame {
      */
     private Controler_Hospede controleHospede;
     private ITfactory fabricaHospede;
+    private FuncionarioDTO atualFLogado;
     
-    public Frm_cadastroHospede() {
+    public Frm_cadastroHospede(FuncionarioDTO atualloLogado) {
         initComponents();
         fabricaHospede = new FactoryHospede();
         controleHospede = (Controler_Hospede) fabricaHospede.gerar("control");
-
+        atualFLogado = atualloLogado;
         this.preencherTabela();
 
     }
@@ -333,7 +335,7 @@ public class Frm_cadastroHospede extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new Frm_inicial().setVisible(true);
+        new Frm_inicial(atualFLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

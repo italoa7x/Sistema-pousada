@@ -21,21 +21,21 @@ public class Frm_inicial extends javax.swing.JFrame {
     public Frm_inicial(FuncionarioDTO logado) {
         initComponents();
         this.funcionarioLogado = logado;
-
         this.lblLogado.setText("Logado: " + funcionarioLogado.getName());
-    }
-
-    public Frm_inicial() {
-        initComponents();
+        this.verificaLogado();
     }
 
     private void verificaLogado() {
-        FuncionarioDTO adminLogado = new FuncionarioDTO();
-        if (funcionarioLogado.getCpf().equalsIgnoreCase("000.0000.000-00")) {
-            adminLogado.setId(000);
-            adminLogado.setName("MASTER");
-            adminLogado.setCargo("ADMIN");
-            funcionarioLogado = adminLogado;
+        if (funcionarioLogado.getId() > 0) {
+            if (funcionarioLogado.getCargo().equalsIgnoreCase("recepcionista")) {
+                this.barraDeMenus.setVisible(false);
+                this.btPedido.setVisible(false);
+            } else if (funcionarioLogado.getCargo().equalsIgnoreCase("atendente")) {
+                this.barraDeMenus.setVisible(false);
+                this.btReserva.setVisible(false);
+                this.btPagamento.setVisible(false);
+            }
+
         }
     }
 
@@ -57,11 +57,8 @@ public class Frm_inicial extends javax.swing.JFrame {
         btPagamento = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
         lblLogado = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        barraDeMenus = new javax.swing.JMenuBar();
         menuRegistro = new javax.swing.JMenu();
-        ooRegistroFuncionarios = new javax.swing.JMenuItem();
-        opRegistroHospedes = new javax.swing.JMenuItem();
-        opRegistroProdutos = new javax.swing.JMenuItem();
         opRegistroVendas = new javax.swing.JMenuItem();
         opRelatorioVendas = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -148,26 +145,22 @@ public class Frm_inicial extends javax.swing.JFrame {
 
         menuRegistro.setText("Registro");
 
-        ooRegistroFuncionarios.setText("Funcionários");
-        menuRegistro.add(ooRegistroFuncionarios);
-
-        opRegistroHospedes.setText("Hóspedes");
-        menuRegistro.add(opRegistroHospedes);
-
-        opRegistroProdutos.setText("Produtos");
-        menuRegistro.add(opRegistroProdutos);
-
         opRegistroVendas.setText("Vendas");
+        opRegistroVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opRegistroVendasActionPerformed(evt);
+            }
+        });
         menuRegistro.add(opRegistroVendas);
 
-        jMenuBar1.add(menuRegistro);
+        barraDeMenus.add(menuRegistro);
 
         opRelatorioVendas.setText("Relatório");
 
         jMenuItem5.setText("Vendas");
         opRelatorioVendas.add(jMenuItem5);
 
-        jMenuBar1.add(opRelatorioVendas);
+        barraDeMenus.add(opRelatorioVendas);
 
         menuInfo.setText("Informações");
 
@@ -179,7 +172,7 @@ public class Frm_inicial extends javax.swing.JFrame {
         });
         menuInfo.add(OpSobre);
 
-        jMenuBar1.add(menuInfo);
+        barraDeMenus.add(menuInfo);
 
         menuCadastro.setText("Cadastro");
 
@@ -207,9 +200,9 @@ public class Frm_inicial extends javax.swing.JFrame {
         });
         menuCadastro.add(opCadastroQuarto);
 
-        jMenuBar1.add(menuCadastro);
+        barraDeMenus.add(menuCadastro);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(barraDeMenus);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -246,25 +239,25 @@ public class Frm_inicial extends javax.swing.JFrame {
 
     private void opCadastroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opCadastroFuncionarioActionPerformed
         // TODO add your handling code here:
-        new Frm_cadastroFuncionario().setVisible(true);
+        new Frm_cadastroFuncionario(funcionarioLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_opCadastroFuncionarioActionPerformed
 
     private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
         // TODO add your handling code here:
-        new Frm_cadastroHospede().setVisible(true);
+        new Frm_cadastroHospede(funcionarioLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_btCadastroActionPerformed
 
     private void opCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opCadastroProdutoActionPerformed
         // TODO add your handling code here:
-        new Frm_cadastroProduto().setVisible(true);
+        new Frm_cadastroProduto(funcionarioLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_opCadastroProdutoActionPerformed
 
     private void opCadastroQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opCadastroQuartoActionPerformed
         // TODO add your handling code here:
-        new Frm_cadastroQuarto().setVisible(true);
+        new Frm_cadastroQuarto(funcionarioLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_opCadastroQuartoActionPerformed
 
@@ -274,16 +267,22 @@ public class Frm_inicial extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btPedidoActionPerformed
 
+    private void opRegistroVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opRegistroVendasActionPerformed
+        // TODO add your handling code here:
+        new Frm_vendas(funcionarioLogado).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_opRegistroVendasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem OpSobre;
+    private javax.swing.JMenuBar barraDeMenus;
     private javax.swing.JButton btCadastro;
     private javax.swing.JButton btPagamento;
     private javax.swing.JButton btPedido;
     private javax.swing.JButton btReserva;
     private javax.swing.JButton btSair;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
@@ -291,12 +290,9 @@ public class Frm_inicial extends javax.swing.JFrame {
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenu menuInfo;
     private javax.swing.JMenu menuRegistro;
-    private javax.swing.JMenuItem ooRegistroFuncionarios;
     private javax.swing.JMenuItem opCadastroFuncionario;
     private javax.swing.JMenuItem opCadastroProduto;
     private javax.swing.JMenuItem opCadastroQuarto;
-    private javax.swing.JMenuItem opRegistroHospedes;
-    private javax.swing.JMenuItem opRegistroProdutos;
     private javax.swing.JMenuItem opRegistroVendas;
     private javax.swing.JMenu opRelatorioVendas;
     // End of variables declaration//GEN-END:variables

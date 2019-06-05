@@ -19,7 +19,7 @@ public interface ServicePessoa {
     
     public boolean atualizar(Object obj) throws Exception;
     
-    public Object acessar_sistema(String cpf) throws Exception;
+    public Object acessar_sistema(String cpf, String cargo) throws Exception;
     
     public Object buscar_por_nome(String nome) throws Exception;
 }

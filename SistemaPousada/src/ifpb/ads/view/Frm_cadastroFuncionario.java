@@ -24,9 +24,12 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
      */
     private Controler_Funcionario controleFuncionario;
     private ITfactory fabricaFuncionario;
+    private FuncionarioDTO atualFLogado;
     
-    public Frm_cadastroFuncionario() {
+    
+    public Frm_cadastroFuncionario(FuncionarioDTO atualLogado) {
         initComponents();
+        atualFLogado = atualLogado;
         fabricaFuncionario = new FactoryFuncionario();
         controleFuncionario = (Controler_Funcionario) fabricaFuncionario.gerar("control");
         this.preencherTabela();
@@ -335,7 +338,7 @@ public class Frm_cadastroFuncionario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new Frm_inicial().setVisible(true);
+        new Frm_inicial(atualFLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

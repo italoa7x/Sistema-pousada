@@ -90,11 +90,12 @@ public class FuncionarioDAO implements ITfuncionarioDAO{
     }
 
     @Override
-    public Object acessSystem(String cpf) throws Exception {
+    public Object acessSystem(String cpf, String cargo) throws Exception {
         FuncionarioDTO logado = new FuncionarioDTO();
         try{
-            pst = con.prepareStatement("SELECT *FROM funcionario WHERE cpf = ?");
+            pst = con.prepareStatement("SELECT *FROM funcionario WHERE cpf = ? and cargo = ?");
             pst.setString(1, cpf);
+            pst.setString(2, cargo);
             rs = pst.executeQuery();
             while(rs.next()){
                 logado.setName(rs.getString("nome"));

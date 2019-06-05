@@ -26,7 +26,7 @@ public class AdapterHospede extends HospedeDAO implements ServicePessoa {
     }
 
     @Override
-    public Object acessar_sistema(String cpf) throws Exception {
+    public Object acessar_sistema(String cpf, String cargo) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

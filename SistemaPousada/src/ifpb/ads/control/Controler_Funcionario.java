@@ -15,8 +15,8 @@ public class Controler_Funcionario implements StrategyCrud{
         funcionario = new Funcionario();
     }
     
-    public FuncionarioDTO acessSistem(String cpf) throws Exception{
-        return funcionario.acessSystem(cpf);
+    public FuncionarioDTO acessSistem(String cpf, String cargo) throws Exception{
+        return funcionario.acessSystem(cpf, cargo);
     }
     
     @Override

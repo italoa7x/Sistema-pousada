@@ -26,8 +26,8 @@ public class AdapterFuncionario extends FuncionarioDAO implements ServicePessoa{
     }
 
     @Override
-    public Object acessar_sistema( String cpf) throws Exception {
-        return super.acessSystem(cpf);
+    public Object acessar_sistema( String cpf, String cargo) throws Exception {
+        return super.acessSystem(cpf, cargo);
     }
 
     @Override

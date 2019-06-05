@@ -29,8 +29,8 @@ public class Funcionario extends Pessoa implements StrategyCrud{
         this.cargo = cargo;
     }
     
-    public FuncionarioDTO acessSystem(String cpf) throws Exception{
-        return (FuncionarioDTO) daoFuncionario.acessar_sistema(cpf);
+    public FuncionarioDTO acessSystem(String cpf, String cargo) throws Exception{
+        return (FuncionarioDTO) daoFuncionario.acessar_sistema(cpf, cargo);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class Funcionario extends Pessoa implements StrategyCrud{
         fechaCon.fecharConexoes();
     }
 
-    public Object acessSistem(String cpf) throws Exception {
-        return daoFuncionario.acessar_sistema(cpf);
+    public Object acessSistem(String cpf, String cargo) throws Exception {
+        return daoFuncionario.acessar_sistema(cpf,cargo);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class Frm_login extends javax.swing.JFrame {
      */
     private Controler_Funcionario controleFuncionario;
     private ITfactory fabricaFuncionario;
-    
+
     public Frm_login() {
         initComponents();
         fabricaFuncionario = new FactoryFuncionario();
@@ -39,80 +39,67 @@ public class Frm_login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         area_cpf = new javax.swing.JFormattedTextField();
+        jLabel2 = new javax.swing.JLabel();
         bt_acessar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         btSair = new javax.swing.JButton();
+        comboCargos = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(76, 76, 76));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entre com CPF", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(254, 254, 254))); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel2.setText("CPF");
+        jPanel1.setLayout(null);
 
         try {
             area_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.####.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jPanel1.add(area_cpf);
+        area_cpf.setBounds(150, 130, 200, 30);
 
+        jLabel2.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel2.setText("Cargo");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(110, 70, 60, 20);
+
+        bt_acessar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_Login_in_85205_1.png"))); // NOI18N
         bt_acessar.setText("Acessar");
         bt_acessar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_acessarActionPerformed(evt);
             }
         });
+        jPanel1.add(bt_acessar);
+        bt_acessar.setBounds(81, 220, 110, 33);
 
-        jLabel3.setBackground(new java.awt.Color(204, 221, 31));
-        jLabel3.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(216, 223, 40));
-        jLabel3.setText("Pousada Recanto do Sol");
-
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/iconfinder_Login_out_85206.png"))); // NOI18N
         btSair.setText("Sair");
         btSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSairActionPerformed(evt);
             }
         });
+        jPanel1.add(btSair);
+        btSair.setBounds(260, 220, 80, 30);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(20, 20, 20)
-                        .addComponent(area_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(bt_acessar)
-                        .addGap(103, 103, 103)
-                        .addComponent(btSair)))
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(area_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_acessar)
-                    .addComponent(btSair))
-                .addGap(42, 42, 42))
-        );
+        comboCargos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atendente", "Recepcionista", "Gerente" }));
+        jPanel1.add(comboCargos);
+        comboCargos.setBounds(156, 70, 190, 40);
+
+        jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel3.setText("CPF");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(110, 130, 26, 20);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ifpb/ads/icones/background.jpg"))); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 450, 280);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,22 +120,23 @@ public class Frm_login extends javax.swing.JFrame {
         // TODO add your handling code here:
         FuncionarioDTO logado = (FuncionarioDTO) fabricaFuncionario.gerar("dto");
         try {
-            String cpf = this.area_cpf.getText();
+            String cpf = area_cpf.getText();
+            String cargo = (String) comboCargos.getSelectedItem();
+
             if (cpf.equals("111.1111.111-11")) {
-                logado.setCpf(cpf);
+                logado.setName("MASTER");
                 new Frm_inicial(logado).setVisible(true);
                 dispose();
             } else {
-                logado = (FuncionarioDTO) controleFuncionario.acessSistem(cpf);
+                logado = controleFuncionario.acessSistem(cpf, cargo);
                 if (logado.getId() > 0) {
                     new Frm_inicial(logado).setVisible(true);
                     dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Funcionário não cadastrado.");
                 }
             }
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o sistema. " + e.getMessage());
         }
     }//GEN-LAST:event_bt_acessarActionPerformed
 
@@ -193,6 +181,8 @@ public class Frm_login extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField area_cpf;
     private javax.swing.JButton btSair;
     private javax.swing.JButton bt_acessar;
+    private javax.swing.JComboBox<String> comboCargos;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

@@ -138,7 +138,7 @@
                   <Component id="btSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="36" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -342,6 +342,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btSalvar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/ifpb/ads/icones/iconfinder_ok_2639876.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
       <Events>
@@ -350,6 +353,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btVoltar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/ifpb/ads/icones/iconfinder_Login_out_85206.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="voltar"/>
       </Properties>
       <Events>

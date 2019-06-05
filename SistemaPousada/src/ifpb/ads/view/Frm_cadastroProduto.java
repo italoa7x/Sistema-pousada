@@ -6,13 +6,13 @@
 package ifpb.ads.view;
 
 import ifpb.ads.control.Controler_Produto;
+import ifpb.ads.dto.FuncionarioDTO;
 import ifpb.ads.dto.ProdutoDTO;
 import ifpb.ads.iterator.IteratorProdutoDTO;
 import ifpb.ads.view.factoryControl.FactoryProduto;
 import ifpb.ads.view.factoryControl.ITfactory;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import ifpb.ads.strategy.StrategyCrud;
 
 /**
  *
@@ -25,12 +25,13 @@ public class Frm_cadastroProduto extends javax.swing.JFrame {
      */
     private Controler_Produto controleProduto;
     private ITfactory fabricaProdutos;
+    private FuncionarioDTO atualFLogado;
     
-    public Frm_cadastroProduto() {
+    public Frm_cadastroProduto(FuncionarioDTO atualLogado) {
         initComponents();
         fabricaProdutos = new FactoryProduto();
         controleProduto = (Controler_Produto) fabricaProdutos.gerar("control");
-
+        atualFLogado = atualLogado;
         this.preencherTabela();
 
     }
@@ -286,13 +287,13 @@ public class Frm_cadastroProduto extends javax.swing.JFrame {
                 this.atualizarTabela();
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Não é possível excluir o quarto, pois o mesmo está sendo usado em um registro");
         }
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new Frm_inicial().setVisible(true);
+        new Frm_inicial(atualFLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

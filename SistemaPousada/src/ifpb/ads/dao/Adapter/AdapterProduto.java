@@ -35,7 +35,7 @@ public class AdapterProduto extends ProdutoDAO implements ServicePessoa {
     }
 
     @Override
-    public Object acessar_sistema(String senha) throws Exception {
+    public Object acessar_sistema(String senha, String cargo) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
