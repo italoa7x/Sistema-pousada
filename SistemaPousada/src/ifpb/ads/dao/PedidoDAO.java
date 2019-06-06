@@ -58,17 +58,18 @@ public class PedidoDAO implements ITpedidoDAO {
     public Object read() throws Exception {
         ArrayList<String[]> lista = new ArrayList<String[]>();
         try {
-            pst = con.prepareStatement("select p.id as codigo, h.nome hospede, prod.nome as produto, (pp.quantidade * prod.valor) as total from \n"
+            pst = con.prepareStatement("select p.id as codigo, h.nome hospede, prod.nome as produto, (pp.quantidade * prod.valor) as total, p.data_pedido from\n"
                     + "pedido p inner join produto_pedido pp on (p.id = pp.id_pedido) inner join produto prod\n"
                     + "on (pp.id_produto = prod.id) inner join hospede h on (h.id = p.id_hospede)");
 
             rs = pst.executeQuery();
             while (rs.next()) {
-                String[] dados = new String[4];
+                String[] dados = new String[5];
                 dados[0] = rs.getInt("codigo") + "";
                 dados[1] = rs.getString("hospede");
                 dados[2] = rs.getString("produto");
                 dados[3] = rs.getDouble("total") + "";
+                dados[4] = rs.getDate("data_pedido") + "";
                 lista.add(dados);
             }
 

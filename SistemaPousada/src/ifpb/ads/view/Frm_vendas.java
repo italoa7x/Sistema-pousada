@@ -51,7 +51,7 @@ public class Frm_vendas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "N° pedido", "Hóspede", "Produto", "Total"
+                "N° pedido", "Hóspede", "Produto", "Total", "Data"
             }
         ));
         jScrollPane1.setViewportView(tbl_pedidos);

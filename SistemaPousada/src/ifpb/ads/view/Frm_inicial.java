@@ -5,7 +5,14 @@
  */
 package ifpb.ads.view;
 
+import ifpb.ads.bd.ConnectionFactory;
 import ifpb.ads.dto.FuncionarioDTO;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -158,6 +165,11 @@ public class Frm_inicial extends javax.swing.JFrame {
         opRelatorioVendas.setText("Relatório");
 
         jMenuItem5.setText("Vendas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         opRelatorioVendas.add(jMenuItem5);
 
         barraDeMenus.add(opRelatorioVendas);
@@ -272,6 +284,23 @@ public class Frm_inicial extends javax.swing.JFrame {
         new Frm_vendas(funcionarioLogado).setVisible(true);
         dispose();
     }//GEN-LAST:event_opRegistroVendasActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        int respost = JOptionPane.showConfirmDialog(null,"Deseja visualizar o relatório?");
+        if(respost == JOptionPane.YES_OPTION){
+            Connection con = ConnectionFactory.returnInstance().initConection();
+            String caminho = "Relatorio_vendas.jasper";
+            JasperPrint jasper = null;
+            try {
+                jasper = JasperFillManager.fillReport(caminho, null, con);
+                JasperViewer view = new JasperViewer(jasper, false);
+                view.setVisible(true);
+            } catch (JRException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao gerar relatório.");
+            }
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
