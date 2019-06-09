@@ -19,7 +19,7 @@ public class Frm_escolherExtra extends javax.swing.JFrame {
 
     private Frm_cadastroQuarto tela;
     private ControlerExtra controlExtra;
-    
+
     public Frm_escolherExtra(Frm_cadastroQuarto atual) {
         initComponents();
         controlExtra = new ControlerExtra();
@@ -32,8 +32,8 @@ public class Frm_escolherExtra extends javax.swing.JFrame {
         try {
             ExtraDTO extras = (ExtraDTO) controlExtra.read();
             IteratorExtraDTO iterator = new IteratorExtraDTO(extras.getAllReservas());
-            
-            while(iterator.hasnext()){
+
+            while (iterator.hasnext()) {
                 ExtraDTO atual = (ExtraDTO) iterator.next();
                 String[] dados = new String[2];
                 dados[0] = atual.getId() + "";
@@ -41,7 +41,7 @@ public class Frm_escolherExtra extends javax.swing.JFrame {
                 modelo.addRow(dados);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }
@@ -104,9 +104,12 @@ public class Frm_escolherExtra extends javax.swing.JFrame {
     private void btEscolherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEscolherActionPerformed
         // TODO add your handling code here:
         int linha = tbl_extra.getSelectedRow();
-        String id = (String) tbl_extra.getValueAt(linha, 0);
-        String extra = (String) tbl_extra.getValueAt(linha, 1);
-        tela.inserirExtra(id, extra);
+        if (linha != -1) {
+            String id = (String) tbl_extra.getValueAt(linha, 0);
+            String extra = (String) tbl_extra.getValueAt(linha, 1);
+            tela.inserirExtra(id, extra);
+        }
+
     }//GEN-LAST:event_btEscolherActionPerformed
 
 

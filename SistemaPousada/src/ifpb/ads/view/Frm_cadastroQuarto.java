@@ -271,7 +271,7 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(campoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,14 +314,14 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
                             .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btVerExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btSalvar)
                     .addComponent(btVoltar))
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addGap(0, 39, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(663, 430));
+        setSize(new java.awt.Dimension(663, 474));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -402,8 +402,13 @@ public class Frm_cadastroQuarto extends javax.swing.JFrame {
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         // TODO add your handling code here:
-        new Frm_inicial(atualFLogado).setVisible(true);
-        dispose();
+        if(atualFLogado != null){
+            new Frm_inicial(atualFLogado).setVisible(true);
+            dispose();
+        }else{
+            new Frm_inicial(null).setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btVerExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerExtrasActionPerformed

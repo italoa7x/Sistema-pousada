@@ -28,12 +28,12 @@ public class Frm_inicial extends javax.swing.JFrame {
     public Frm_inicial(FuncionarioDTO logado) {
         initComponents();
         this.funcionarioLogado = logado;
-        this.lblLogado.setText("Logado: " + funcionarioLogado.getName());
         this.verificaLogado();
     }
 
     private void verificaLogado() {
-        if (funcionarioLogado.getId() > 0) {
+        if (funcionarioLogado != null && funcionarioLogado.getId() > 0) {
+            this.lblLogado.setText("Logado: " + funcionarioLogado.getName());
             if (funcionarioLogado.getCargo().equalsIgnoreCase("recepcionista")) {
                 this.barraDeMenus.setVisible(false);
                 this.btPedido.setVisible(false);
@@ -287,8 +287,8 @@ public class Frm_inicial extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        int respost = JOptionPane.showConfirmDialog(null,"Deseja visualizar o relatório?");
-        if(respost == JOptionPane.YES_OPTION){
+        int respost = JOptionPane.showConfirmDialog(null, "Deseja visualizar o relatório?");
+        if (respost == JOptionPane.YES_OPTION) {
             Connection con = ConnectionFactory.returnInstance().initConection();
             String caminho = "Relatorio_vendas.jasper";
             JasperPrint jasper = null;

@@ -14,6 +14,17 @@ public class ReservaDTO {
     private double soma_diaria;
     private int id;
     private ArrayList<ReservaDTO> allReservas;
+    private double diariaHoje;
+
+    public double getDiariaHoje() {
+        return diariaHoje;
+    }
+
+    public void setDiariaHoje(double diariaHoje) {
+        this.diariaHoje = diariaHoje;
+    }
+    
+    
 
     public ArrayList<ReservaDTO> getAllReservas() {
         return allReservas;

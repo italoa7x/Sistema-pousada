@@ -92,7 +92,6 @@ public class HospedeDAO implements IThospedeDAO {
 
     @Override
     public HospedeDTO search(String name) throws Exception {
-        System.out.println(name);
         try {
             HospedeDTO retorno = new HospedeDTO();
             String sql = "SELECT *FROM hospede WHERE nome LIKE ?";

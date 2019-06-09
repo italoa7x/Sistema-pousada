@@ -24,7 +24,7 @@ public class ExtraDAO implements ITextraDAO {
 
             while(rs.next()){
                 ExtraDTO atual = new ExtraDTO();
-                atual.setExtra(rs.getString("extra"));
+                atual.setExtra(rs.getString("descricao"));
                 atual.setId(rs.getInt("id"));
                 vetor.add(atual);
             }
